@@ -3,6 +3,8 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import SidebarDemo from "@/components/sidebar";
+import { Navbar } from "@/components/navbar/navbar";
+import { cn } from "@/lib/utils";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,11 +24,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          poppins.variable
+        )}
+      >
         <SidebarProvider>
           <div className="flex">
-            <SidebarDemo />
-            <main className="flex-1 p-4">{children}</main>
+            <div className="sticky z-40 top-0 h-screen">
+              <SidebarDemo />
+            </div>
+            <div className="flex-1 flex flex-col">
+              <div className="sticky top-0 z-30 bg-background">
+                <Navbar />
+              </div>
+              <main className="flex-1 p-4 z-30">{children}</main>
+            </div>
           </div>
         </SidebarProvider>
       </body>

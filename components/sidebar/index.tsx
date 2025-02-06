@@ -9,7 +9,6 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function SidebarDemo() {
@@ -17,59 +16,68 @@ export default function SidebarDemo() {
     {
       label: "Dashboard",
       href: "/",
-      icon: <IconDashboard className="text-white h-8 w-8 flex-shrink-0" />,
+      icon: (
+        <IconDashboard className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
     },
     {
       label: "Areas de Plantio",
       href: "#",
-      icon: <IconUserBolt className="text-white h-8 w-8 flex-shrink-0" />,
+      icon: (
+        <IconUserBolt className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
     },
-
     {
       label: "Tarefas",
       href: "/tarefas",
-      icon: <IconSettings className="text-white h-8 w-8 flex-shrink-0" />,
+      icon: (
+        <IconSettings className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
     },
     {
       label: "Participantes",
       href: "#",
-      icon: <IconArrowLeft className="text-white h-8 w-8 flex-shrink-0" />,
+      icon: (
+        <IconArrowLeft className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
     },
     {
       label: "Minha Conta",
       href: "#",
-      icon: <IconArrowLeft className="text-white h-8 w-8 flex-shrink-0" />,
+      icon: (
+        <IconArrowLeft className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
     },
     {
       label: "Configuraçoes",
       href: "#",
-      icon: <IconArrowLeft className="text-white h-8 w-8 flex-shrink-0" />,
+      icon: (
+        <IconArrowLeft className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
     },
   ];
   const [open, setOpen] = useState(false);
   return (
-    <div
-      className={cn("flex flex-col md:flex-row bg-gray-100", "min-h-screen")}
-    >
+    <div className="">
       <Sidebar open={open} setOpen={setOpen} animate={false}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
             <>
               <Logo />
             </>
-            <div className="mt-8 flex flex-col gap-2">
+            <div className="mt-8 flex flex-col gap-2 ">
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
             </div>
           </div>
-          <div>
+          <div className="py-4">
             <SidebarLink
               link={{
                 label: "Comunidades",
                 href: "#",
                 icon: (
-                  <IconSettings className="text-white h-8 w-8 flex-shrink-0" />
+                  <IconSettings className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
                 ),
               }}
             />
@@ -78,7 +86,7 @@ export default function SidebarDemo() {
                 label: "Sair",
                 href: "#",
                 icon: (
-                  <IconSettings className="text-white h-8 w-8 flex-shrink-0" />
+                  <IconSettings className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
                 ),
               }}
             />
@@ -92,7 +100,7 @@ export const Logo = () => {
   return (
     <Link
       href="#"
-      className="font-normal mx-auto flex space-x-2 items-center text-sm text-white py-4 relative z-20"
+      className="font-normal mx-auto flex space-x-2 items-center bg-[#8ABF17] text-sm text-white py-4 relative z-20"
     >
       <motion.span
         initial={{ opacity: 0 }}
