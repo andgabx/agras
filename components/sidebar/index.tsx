@@ -87,8 +87,8 @@ export const Logo = () => {
         className="font-medium text-xl text-white dark:text-white whitespace-pre"
       >
         <div className="flex items-center justify-center flex-col">
-        <Image src="/logo.png" alt="logo" width={150} height={150} className="" />
-        <div className="border-b-[1px] border-[#CECECE] fixed w-[767px] lg:w-[303px] h-[63px]"></div>
+        <Image src="/logo.png" alt="logo" width={150} height={150} className="transform translate-y-2 -translate-x-1" />
+        <div className="border-b-[1px] border-[#CECECE] fixed w-[767px] lg:w-[265px] h-[95px]"></div>
         </div>
 
       </motion.span>
