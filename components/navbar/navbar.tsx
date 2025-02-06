@@ -29,7 +29,7 @@ export function Navbar() {
           <div className="flex items-center space-x-2 cursor-pointer p-1 rounded-lg hover:bg-[#c0c0c046]">
             <Avatar className="h-8 w-8">
               <AvatarImage src="" />
-              <AvatarFallback>MJ</AvatarFallback>
+              <AvatarFallback className="bg-[#8ABF17] text-white font-semibold">MJ</AvatarFallback>
             </Avatar>
             
             {/* Informações do usuário - Oculto em mobile */}
