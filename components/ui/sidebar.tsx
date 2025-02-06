@@ -91,11 +91,11 @@ export const DesktopSidebar = ({
     <>
       <motion.div
         className={cn(
-          "md:h-screen hidden md:flex md:flex-col bg-[#8ABF17] w-[300px] flex-shrink-0",
+          "md:h-screen hidden md:flex md:flex-col bg-[#8ABF17] w-[265px] flex-shrink-0",
           className
         )}
         animate={{
-          width: animate ? (open ? "300px" : "60px") : "300px",
+          width: animate ? (open ? "265px" : "60px") : "265px",
         }}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -138,12 +138,12 @@ export const MobileSidebar = ({
                 ease: "easeInOut",
               }}
               className={cn(
-                "fixed h-screen w-full inset-0 bg-[#8ABF17] dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
+                "fixed h-screen w-full inset-0 bg-[#8ABF17] dark:bg-neutral-900 z-[100] flex flex-col justify-between",
                 className
               )}
             >
               <div
-                className="absolute right-10 top-10 z-50 text-white dark:text-white"
+                className="absolute right-10 top-4 z-50 text-white dark:text-white"
                 onClick={() => setOpen(!open)}
               >
                 <IconX />

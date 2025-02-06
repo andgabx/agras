@@ -58,7 +58,7 @@ export default function SidebarDemo() {
   ];
   const [open, setOpen] = useState(false);
   return (
-    <div className="">
+    <div className="border-b md:border-r-[1px] sm:border-[#CECECE]">
       <Sidebar open={open} setOpen={setOpen} animate={false}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -107,7 +107,11 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-medium text-xl text-white dark:text-white whitespace-pre"
       >
-        <Image src="/logo.png" alt="logo" width={150} height={150} />
+        <div className="flex items-center justify-center flex-col">
+        <Image src="/logo.png" alt="logo" width={150} height={150} className="" />
+        <div className="border-b-[1px] border-[#CECECE] fixed w-[767px] lg:w-[303px] h-[63px]"></div>
+        </div>
+
       </motion.span>
     </Link>
   );
