@@ -172,36 +172,50 @@ export const SidebarLink = ({
   const isActive = pathname === link.href;
 
   return (
-    <Link
-      href={link.href}
-      className={cn(
-        "px-8 hover:bg-white flex items-center justify-start gap-2 w-full text-white group/sidebar py-2",
-        isActive && "bg-white",
-        className
-      )}
-      {...props}
-    >
-      <span
+    <div className="relative">
+      <Link
+        href={link.href}
         className={cn(
-          "group-hover/sidebar:text-[#8ABF17]",
-          isActive && "text-[#8ABF17]"
+          "px-8 hover:bg-white flex items-center justify-start gap-2 w-full text-white group/sidebar py-2",
+          isActive && "bg-white",
+          className
         )}
+        {...props}
       >
-        {link.icon}
-      </span>
+        <span
+          className={cn(
+            "group-hover/sidebar:text-[#8ABF17]",
+            isActive && "text-[#8ABF17]"
+          )}
+        >
+          {link.icon}
+        </span>
 
-      <motion.span
-        animate={{
-          display: animate ? (open ? "inline-block" : "none") : "inline-block",
-          opacity: animate ? (open ? 1 : 0) : 1,
-        }}
+        <motion.span
+          animate={{
+            display: animate
+              ? open
+                ? "inline-block"
+                : "none"
+              : "inline-block",
+            opacity: animate ? (open ? 1 : 0) : 1,
+          }}
+          className={cn(
+            "text-white group-hover/sidebar:translate-x-1 group-hover/sidebar:text-[#8ABF17] transition duration-150 whitespace-pre inline-block !p-0 !m-0",
+            isActive && "text-[#8ABF17] translate-x-1"
+          )}
+        >
+          {link.label}
+        </motion.span>
+      </Link>
+      <div
         className={cn(
-          "text-white text-lg group-hover/sidebar:translate-x-1 group-hover/sidebar:text-[#8ABF17] transition duration-150 whitespace-pre inline-block !p-0 !m-0",
-          isActive && "text-[#8ABF17] translate-x-1"
+          "w-[5px] bg-[#5F8C1B] absolute left-0 top-0 bottom-0 transition-all duration-300 transform origin-left",
+          isActive
+            ? "opacity-100 scale-y-100"
+            : "opacity-0 scale-y-50 group-hover/sidebar:opacity-100 group-hover/sidebar:scale-y-100"
         )}
-      >
-        {link.label}
-      </motion.span>
-    </Link>
+      />
+    </div>
   );
 };

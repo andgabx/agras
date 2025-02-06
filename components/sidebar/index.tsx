@@ -1,12 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
-import {
-  IconArrowLeft,
-  IconDashboard,
-  IconSettings,
-  IconUserBolt,
-} from "@tabler/icons-react";
+import { LogOut, LayoutDashboard, CalendarCheck, Users, Settings, Trees} from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -17,42 +12,35 @@ export default function SidebarDemo() {
       label: "Dashboard",
       href: "/",
       icon: (
-        <IconDashboard className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <LayoutDashboard className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
     },
     {
       label: "Areas de Plantio",
       href: "#",
       icon: (
-        <IconUserBolt className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <Trees className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
     },
     {
       label: "Tarefas",
       href: "/tarefas",
       icon: (
-        <IconSettings className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <CalendarCheck className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
     },
     {
       label: "Participantes",
       href: "#",
       icon: (
-        <IconArrowLeft className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
-      ),
-    },
-    {
-      label: "Minha Conta",
-      href: "#",
-      icon: (
-        <IconArrowLeft className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
     },
     {
       label: "Configuraçoes",
       href: "#",
       icon: (
-        <IconArrowLeft className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <Settings className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
     },
   ];
@@ -74,19 +62,10 @@ export default function SidebarDemo() {
           <div className="py-4">
             <SidebarLink
               link={{
-                label: "Comunidades",
-                href: "#",
-                icon: (
-                  <IconSettings className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
-                ),
-              }}
-            />
-            <SidebarLink
-              link={{
                 label: "Sair",
                 href: "#",
                 icon: (
-                  <IconSettings className="h-8 w-8 flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+                  <LogOut className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
                 ),
               }}
             />
