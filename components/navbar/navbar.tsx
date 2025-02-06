@@ -11,10 +11,10 @@ import {
 export function Navbar() {
   return (
     <div className="border-b">
-      <div className="flex h-16 items-center px-4">
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          <h2 className="text-lg font-semibold sm:text-lg">Coletivo Raio de Sol</h2>
-          <span className="hidden text-sm text-muted-foreground sm:block">COMUNIDADE</span>
+      <div className="flex h-20 items-center px-4">
+        <div className="flex flex-col ml-2 items-start">
+          <span className="text-sm text-muted-foreground font-medium">COMUNIDADE</span>
+          <h2 className="text-lg font-bold sm:text-xl">Coletivo Raio de Sol</h2>
         </div>
 
         <div className="ml-auto flex items-center space-x-2 sm:space-x-4">
