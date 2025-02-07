@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen font-sans antialiased bg-[#FAFAFA]",
           poppins.variable
         )}
       >
@@ -35,10 +35,10 @@ export default function RootLayout({
           
             </div>
             <div className="flex-1 flex flex-col">
-              <div className="sticky top-0 z-30 bg-background">
+              <div className="sticky top-0 z-30">
         
               </div>
-              <main className="flex-1 p-4 z-30">{children}</main>
+              <main className="flex-1  z-30">{children}</main>
               <Toaster />
             </div>
           </div>

@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { signUpWithEmail } from "@/lib/supabase/_auth/auth-signup";
 
-
 export function SignupForm({
   className,
   ...props
@@ -40,20 +39,25 @@ export function SignupForm({
   return (
     <form
       onSubmit={handleSignUp}
-      className={cn("flex flex-col gap-6", className)}
+      className={cn("flex flex-col gap-6 w-96 sm:w-[500px]", className)}
       {...props}
     >
-      <div className="flex flex-col space-y-4 justify-start gap-2 text-center">
-        <Image
+      <div className="flex justify-center mb-12">
+      <Image
           src="/agrasloginlogo.png"
+          className=""
           alt="Login"
-          width={1920}
-          height={1080}
+          width={220}
+          height={220}
         />
-        <h1 className="text-2xl font-bold">Cadastro</h1>
-        <p className="text-balance text-xl font-bold">
-          Seja bem vindo ao Agras!
-        </p>
+      </div>
+      <div className="flex flex-col space-y-4 gap-2 text-center">
+        <div className="flex justify-start items-start flex-col mb-8">
+          <h1 className="text-[50px] font-bold mb-1">Cadastre-se</h1>
+          <p className="text-balance text-xl font-bold">
+            Seja bem vindo(a) ao AGRAS!
+          </p>
+        </div>
       </div>
       <div className="grid gap-6">
         <div className="grid gap-2">
