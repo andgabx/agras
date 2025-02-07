@@ -101,7 +101,7 @@ export function SignupForm({
       </div>
       <div className="text-center text-sm">
         Já tem uma conta?{" "}
-        <Link href="/" className="underline underline-offset-4 text-[#8ABF17]">
+        <Link href="/" className="underline underline-offset-4 text-[#8ABF17] hover:text-[#739E13]">
           Entre aqui
         </Link>
       </div>
