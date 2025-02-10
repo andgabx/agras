@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { CreateInstrumentSchema } from "./schema";
+import { revalidatePath } from "next/cache";
 
 export const createInstrument = async (formData: FormData): Promise<void> => {
   const supabase = await createClient();
@@ -23,6 +24,7 @@ export const createInstrument = async (formData: FormData): Promise<void> => {
 
     .insert({ name, strings });
 
+  revalidatePath("/instruments");
   if (error) {
     throw new Error(error.message);
   }

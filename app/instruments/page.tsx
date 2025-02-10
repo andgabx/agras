@@ -1,5 +1,5 @@
 import { createClient } from '@/utils/supabase/server';
-import InstrumentForm from './instrument-form';
+import InstrumentForm from './_components/instrument-form';
 
 export default async function Instruments() {
   const supabase = await createClient();
@@ -7,8 +7,11 @@ export default async function Instruments() {
 
   return (
     <div>
-      <pre>{JSON.stringify(instruments, null, 2)}</pre>
+      {instruments?.map((instrument) => (
+        <p key={instrument.id}>{JSON.stringify(instrument, null, 2)}</p>
+      ))}
       <InstrumentForm />
     </div>
+
   );
 }

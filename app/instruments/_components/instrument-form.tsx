@@ -20,6 +20,7 @@ export default function InstrumentForm() {
           try {
             await createInstrument(formData);
             alert("Instrumento cadastrado com sucesso!");
+            
           } catch (err: any) {
             setError(err.message);
           }
