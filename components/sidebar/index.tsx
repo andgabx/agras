@@ -13,14 +13,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
-
+import { signOutAction } from "@/app/actions";
 export default function SidebarDemo() {
-  const handleSignOut = async () => {
-    const supabase = createClient();
-    await supabase.auth.signOut();
-    window.location.href = "/"; // Redirect to home after sign out
-  };
-
   const links = [
     {
       label: "Dashboard",
@@ -60,7 +54,7 @@ export default function SidebarDemo() {
     {
       label: "Sair",
       href: "#",
-      onClick: handleSignOut,
+      onClick: signOutAction,
       icon: (
         <LogOut className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),

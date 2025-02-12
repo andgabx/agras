@@ -20,12 +20,15 @@ export default async function Signup(props: {
   }
 
   return (
-    <div className="flex h-screen">
-      <div className="flex items-center justify-center w-full lg:w-1/2 p-8">
+    <div className="flex bg-[#FAFAFA] h-screen">
+      <div className="flex items-center rounded-r-[150px] bg-white justify-center w-full lg:w-1/2 p-8">
         <form className="w-full max-w-md">
           <div className="flex flex-col gap-2">
-            <Image className="mx-auto" src="/agrasloginlogo.png" alt="Logo" width={300} height={100} />
-            <h1 className="text-2xl font-medium">Cadastre-se</h1>
+            <Image className="mx-auto pb-16" src="/agrasloginlogo.png" alt="Logo" width={300} height={100} />
+            <h1 className="text-5xl font-bold">Cadastre-se</h1>
+            <p className="text-xl font-medium text-foreground">
+              Seba bem vindo(a) ao AGRAS!
+            </p>
             
             <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
               <Label className="font-bold" htmlFor="name">Nome</Label>
@@ -68,13 +71,13 @@ export default async function Signup(props: {
         </form>
       </div>
 
-      <div className="hidden lg:block w-1/2 h-screen">
+      <div className="hidden lg:block w-1/2 m-auto px-4">
         <Image
-          src="/agraslogin.png"
+          src="/signup.png"
           alt="Login"
-          width={1920}
-          height={1080}
-          className="w-full h-full object-cover"
+          width={500}
+          height={500}
+          className="mx-auto"
           priority
         />
       </div>

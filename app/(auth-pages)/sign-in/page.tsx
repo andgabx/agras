@@ -3,42 +3,70 @@ import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import Image from "next/image";
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
   const searchParams = await props.searchParams;
   return (
-    <form className="flex-1 flex flex-col min-w-64">
-      <h1 className="text-2xl font-medium">Sign in</h1>
-      <p className="text-sm text-foreground">
-        Don't have an account?{" "}
-        <Link className="text-foreground font-medium underline" href="/sign-up">
-          Sign up
-        </Link>
-      </p>
-      <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-        <Label htmlFor="email">Email</Label>
-        <Input name="email" placeholder="you@example.com" required />
-        <div className="flex justify-between items-center">
-          <Label htmlFor="password">Password</Label>
-          <Link
-            className="text-xs text-foreground underline"
-            href="/forgot-password"
-          >
-            Forgot Password?
-          </Link>
-        </div>
-        <Input
-          type="password"
-          name="password"
-          placeholder="Your password"
-          required
-        />
-        <SubmitButton pendingText="Signing In..." formAction={signInAction}>
-          Sign in
-        </SubmitButton>
-        <FormMessage message={searchParams} />
+    <div className="flex h-screen">
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-8">
+        <form className="flex-1 flex flex-col max-w-md">
+          <h1 className="text-5xl font-bold">Login</h1>
+          <p className="text-xl py-4 font-medium text-foreground">Seja bem vindo(a) novamente!</p>
+          <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
+            <Label htmlFor="email">Email</Label>
+            <Input name="email" placeholder="exemplo@email.com" required />
+            <div className="flex justify-between items-center">
+              <Label htmlFor="password">Senha</Label>
+
+            </div>
+            <Input
+              type="password"
+              name="password"
+              placeholder="Sua senha"
+              required
+            />
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2 py-4">
+                <Checkbox id="remember" />
+                <Label className="text-md" htmlFor="remember">Lembrar-me</Label>
+              </div>
+            <Link
+              className="text-md text-[#8ABF17] underline py-4"
+              href="/forgot-password"
+            >
+                Esqueceu sua senha?
+              </Link>
+            </div>
+
+            <SubmitButton pendingText="Entrando..." formAction={signInAction}>
+              Entrar
+            </SubmitButton>
+            <FormMessage message={searchParams} />
+          </div>
+          <p className="text-center py-4 text-lg text-foreground">
+            Não tem uma conta?{" "}
+            <Link
+              className=" text-[#8ABF17] font-medium underline"
+              href="/sign-up"
+            >
+              Cadastre-se
+            </Link>
+          </p>
+        </form>
+        
       </div>
-    </form>
+      <div className="hidden lg:block relative w-1/2">
+        <Image
+          src="/agraslogin.png"
+          alt="Authentication background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+    </div>
   );
 }
