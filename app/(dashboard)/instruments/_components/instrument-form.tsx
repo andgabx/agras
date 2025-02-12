@@ -1,16 +1,16 @@
 "use client";
 
-import { createInstrument } from "@/app/instruments/_actions/create-instrument";
 import { SubmitButton } from "@/components/submit-button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { createInstrument } from "../_actions/create-instrument";
 
 export default function InstrumentForm() {
   const [error, setError] = useState<string | null>(null);
 
   return (
-    <div>
+    <div className="flex m-auto flex-col gap-4 max-w-md">
       <h2>Adicionar Instrumento</h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
