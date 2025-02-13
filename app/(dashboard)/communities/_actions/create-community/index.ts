@@ -19,6 +19,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
   // Garantir que os valores não sejam nulos
   const name = formData.get("name")?.toString().trim();
   const admin_id = user.id;
+  const creator_name = user.user_metadata.full_name
   const description = formData.get("description")?.toString().trim();
   const city = formData.get("city")?.toString().trim();
   const state = formData.get("state")?.toString().trim();
@@ -29,18 +30,20 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     description,
     city,
     state,
+    creator_name
   });
 
   if (!success) {
     throw new Error("Dados inválidos.");
   }
 
-  const { error } = await supabase.from("community").insert({
+  const { error } = await supabase.from("communities").insert({
     name,
     admin_id,
     description,
     city,
     state,
+    creator_name
     // members_count será 1 por padrão
     // created_at será preenchido automaticamente
   });

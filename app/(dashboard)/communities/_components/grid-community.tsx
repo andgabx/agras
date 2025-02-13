@@ -15,6 +15,7 @@ export async function BentoGridDemo() {
         <BentoGridItem
           key={community.id}
           title={community.name}
+          creator_name={ community.creator_name}
           description={community.description || "Sem descrição"}
           city={community?.city || "Sem cidade"}
           state={community?.state || "Sem estado"}

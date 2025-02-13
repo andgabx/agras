@@ -21,7 +21,7 @@ export default async function Signup(props: {
 
   return (
     <div className="flex bg-[#FAFAFA] h-screen">
-      <div className="flex items-center rounded-r-[150px] bg-white justify-center w-full lg:w-1/2 p-8">
+      <div className="flex items-center rounded-none lg:rounded-r-[120px] bg-white shadow-lg justify-center w-full lg:w-1/2 p-8">
         <form className="w-full max-w-md">
           <div className="flex flex-col gap-2">
             <Image
@@ -32,24 +32,24 @@ export default async function Signup(props: {
               height={100}
             />
             <h1 className="text-5xl font-bold">Cadastre-se</h1>
-            <p className="text-xl font-medium text-foreground">
-              Seba bem vindo(a) ao AGRAS!
+            <p className="text-[18px] font-medium text-foreground">
+              Seja bem vindo(a) ao AGRAS!
             </p>
 
             <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-              <Label className="font-bold" htmlFor="name">
+              <Label htmlFor="name">
                 Nome
               </Label>
               <Input name="name" placeholder="Seu nome" required />
-              <Label className="font-bold" htmlFor="phone">
+              <Label htmlFor="phone">
                 Telefone
               </Label>
               <Input name="phone" placeholder="Seu telefone" required />
-              <Label className="font-bold" htmlFor="email">
+              <Label htmlFor="email">
                 Email
               </Label>
               <Input name="email" placeholder="seu@email.com" required />
-              <Label className="font-bold" htmlFor="password">
+              <Label htmlFor="password">
                 Senha
               </Label>
               <Input
@@ -89,7 +89,7 @@ export default async function Signup(props: {
               <p className="text-sm font-medium text-center text-foreground">
                 Já tem uma conta?{" "}
                 <Link
-                  className="text-[#8ABF17] font-medium underline"
+                  className="hover:text-[#8ABF17]/90 text-[#8ABF17] font-bold underline"
                   href="/sign-in"
                 >
                   Entre aqui
@@ -104,8 +104,8 @@ export default async function Signup(props: {
         <Image
           src="/signup.png"
           alt="Login"
-          width={500}
-          height={500}
+          width={550}
+          height={550}
           className="mx-auto"
           priority
         />

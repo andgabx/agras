@@ -1,5 +1,5 @@
 import { ThemeProvider } from "next-themes";
-import { Geist } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 const defaultUrl = process.env.VERCEL_URL
@@ -8,13 +8,14 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Agras",
+  title: "AGRAS",
   description: "Sistema de gerenciamento de plantio",
 };
 
-const geistSans = Geist({
-  display: "swap",
+const poppins = Poppins({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
 });
 
 export default function RootLayout({
@@ -23,11 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={geistSans.className} suppressHydrationWarning>
+    <html lang="en" className={poppins.variable} suppressHydrationWarning>
       <body className="">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

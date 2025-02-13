@@ -22,7 +22,7 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
           />
 
           <h1 className="text-5xl font-bold">Login</h1>
-          <p className="text-xl py-4 font-medium text-foreground">
+          <p className="text-[18px] py-4 font-medium text-foreground">
             Seja bem vindo(a) novamente!
           </p>
           <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
@@ -40,12 +40,12 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2 py-4">
                 <Checkbox id="remember" />
-                <Label className="text-md" htmlFor="remember">
+                <Label className="text-[15px]" htmlFor="remember">
                   Lembrar-me
                 </Label>
               </div>
               <Link
-                className="text-md text-[#8ABF17] underline py-4"
+                className="text-[14px] hover:text-[#8ABF17]/90 text-[#8ABF17] underline py-4"
                 href="/forgot-password"
               >
                 Esqueceu sua senha?
@@ -57,10 +57,10 @@ export default async function Login(props: { searchParams: Promise<Message> }) {
             </SubmitButton>
             <FormMessage message={searchParams} />
           </div>
-          <p className="text-center py-4 text-lg text-foreground">
+          <p className="text-center py-4 text-sm text-foreground">
             Não tem uma conta?{" "}
             <Link
-              className=" text-[#8ABF17] font-medium underline"
+              className="hover:text-[#8ABF17]/90 text-[#8ABF17] font-bold underline"
               href="/sign-up"
             >
               Cadastre-se

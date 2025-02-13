@@ -58,7 +58,19 @@ export function Navbar() {
             {/* Informações do usuário - Oculto em mobile */}
             <div className="hidden sm:flex sm:flex-col">
               <span className="text-sm font-medium truncate max-w-[120px]">
-                {user?.user_metadata.full_name}
+                {user?.user_metadata.full_name
+                  .split(" ")
+                  .filter((name: string) => name.trim().length > 0)
+                  .reduce((acc: string
+                    , curr: string
+                    , index: number
+                    , arr: Array<number>
+
+                  ) => {
+                    if (index === 0) return curr; // Primeiro nome
+                    if (index === arr.length - 1) return acc + " " + curr; // Último nome
+                    return acc;
+                  }, "")}
               </span>
               <span className="text-xs text-muted-foreground truncate max-w-[120px]">
                 {user?.email}

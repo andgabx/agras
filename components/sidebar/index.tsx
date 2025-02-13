@@ -8,14 +8,25 @@ import {
   Users,
   Settings,
   Trees,
+  UserRoundPen,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { createClient } from "@/utils/supabase/client";
 import { signOutAction } from "@/app/actions";
+import { usePathname } from "next/navigation";
+
 export default function SidebarDemo() {
+  const pathname = usePathname();
+
   const links = [
+    {
+      label: "Comunidades",
+      href: "/communities",
+      icon: (
+        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
+    },
     {
       label: "Dashboard",
       href: "/dashboard",
@@ -38,10 +49,10 @@ export default function SidebarDemo() {
       ),
     },
     {
-      label: "Participantes",
+      label: "Meu Perfil",
       href: "/participantes",
       icon: (
-        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <UserRoundPen className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
     },
     {
@@ -71,9 +82,16 @@ export default function SidebarDemo() {
               <Logo />
             </>
             <div className="mt-8 flex flex-col gap-2 ">
-              {links.slice(0, -1).map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
+              {pathname === "/community" && (
+                <SidebarLink key={0} link={links[0]} />
+              )}
+
+              {pathname !== "/community" &&
+                links
+                  .slice(1)
+                  .map((link, idx) => (
+                    <SidebarLink key={idx + 1} link={link} />
+                  ))}
             </div>
           </div>
           <div className="py-4">
