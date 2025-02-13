@@ -25,7 +25,6 @@ export async function getCommunities() {
   if (error) {
     throw new Error("Erro ao buscar comunidades");
   }
-  console.log(communities)
   
   return communities as Community[];
 }
