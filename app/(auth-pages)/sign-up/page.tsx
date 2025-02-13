@@ -104,7 +104,7 @@ export default async function Signup(props: {
         <Image
           src="/signup.png"
           alt="Login"
-          width={550}
+          width={650}
           height={550}
           className="mx-auto"
           priority
