@@ -24,7 +24,7 @@ export default function DashboardLayout({
           <div className="sticky top-0 z-30">
             <Navbar />
           </div>
-          <main className="flex-1 p-4 z-30">{children}</main>
+          <main className="flex-1 p-4 z-10">{children}</main>
         </div>
       </div>
     </SidebarProvider>

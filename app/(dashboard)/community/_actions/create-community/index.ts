@@ -19,10 +19,12 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
   // Garantir que os valores não sejam nulos
   const name = formData.get("name")?.toString().trim();
   const admin_id = user.id;
+  const description = formData.get("description")?.toString().trim();
 
   const { success } = CreateCommunitySchema.safeParse({
     name,
     admin_id,
+    description,
   });
 
   if (!success) {
@@ -32,11 +34,14 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
   const { error } = await supabase.from("community").insert({
     name,
     admin_id,
+    description,
     // members_count será 1 por padrão
     // created_at será preenchido automaticamente
   });
+  if (success) {
+    revalidatePath("/community");
+  }
 
-  revalidatePath("/community");
   if (error) {
     throw new Error(error.message);
   }

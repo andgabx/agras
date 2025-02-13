@@ -1,7 +1,7 @@
 import { ThemeProvider } from "next-themes";
 import { Geist } from "next/font/google";
 import "./globals.css";
-
+import { Toaster } from "sonner";
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -34,6 +34,7 @@ export default function RootLayout({
           <main className="">
             <div className="min-h-screen bg-background font-sans antialiased">{children}</div>
           </main>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

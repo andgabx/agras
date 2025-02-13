@@ -34,7 +34,7 @@ export function Navbar() {
             COMUNIDADE
           </span>
           <h2 className="text-lg font-bold sm:text-xl">Coletivo Raio de Sol</h2>
-          <ThemeSwitcher />
+          {/* <ThemeSwitcher /> */}
         </div>
 
         <div className="ml-auto flex items-center space-x-2 sm:space-x-4">

@@ -6,34 +6,35 @@ import {
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { createCommunity } from "../_actions/create-community/index";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { DialogClose } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
-export function CreateCommunityForm() {
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+interface CreateCommunityFormProps {
+  onSuccess?: () => void;
+}
+
+export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
 
   async function handleSubmit(formData: FormData) {
     try {
-      setIsLoading(true);
       await createCommunity(formData);
-      router.refresh();
+      toast.success("Comunidade criada com sucesso");
+      onSuccess?.();
     } catch (error) {
       console.error(error);
-      alert("Erro ao criar comunidade");
-    } finally {
-      setIsLoading(false);
-    }
+      toast.error("Erro ao criar comunidade");
+    } 
   }
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Criar Comunidade</CardTitle>
         <CardDescription>
           Crie uma nova comunidade para compartilhar conhecimento musical
         </CardDescription>
@@ -41,17 +42,30 @@ export function CreateCommunityForm() {
       <CardContent>
         <form action={handleSubmit} className="space-y-4">
           <div>
+            <Label htmlFor="name">Nome*</Label>
             <Input
               type="text"
               name="name"
               placeholder="Nome da comunidade"
               required
-              disabled={isLoading}
+            />
+            <Label htmlFor="description">Descrição</Label>
+            <Textarea
+              name="description"
+              placeholder="Descrição da comunidade"
+              className="border-primary rounded-md"
             />
           </div>
-          <Button type="submit" disabled={isLoading}>
-            {isLoading ? "Criando..." : "Criar Comunidade"}
-          </Button>
+          <div className="flex justify-between gap-2">
+            <DialogClose asChild>
+              <Button className="w-full" variant="outline">
+                Cancelar
+              </Button>
+            </DialogClose>
+            <Button className="w-full" type="submit">
+              Criar Comunidade
+            </Button>
+          </div>
         </form>
       </CardContent>
     </Card>

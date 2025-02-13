@@ -1,43 +1,20 @@
 import { Suspense } from "react";
-import { CreateCommunityForm } from "./_components/form";
-import { getCommunities } from "./_actions/get-communities";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-
+import CommunityList from "./_components/community-list";
+import AddCommunityButton from "./_components/add-community-button";
+import { BentoGridDemo } from "./_components/grid-community";
 // Componente para exibir a lista de comunidades
-async function CommunitiesList() {
-  const communities = await getCommunities();
-
-  return (
-    <div className="space-y-4 mt-6">
-      {communities.map((community) => (
-        <Card key={community.id}>
-          <CardHeader>
-            <CardTitle>{community.name}</CardTitle>
-            <CardDescription>
-              Membros: {community.members_count}
-              <br />
-              Criado em: {new Date(community.created_at).toLocaleDateString()}
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      ))}
-    </div>
-  );
-}
 
 // Página principal
 export default function CommunityPage() {
   return (
-    <div className="container mx-auto py-10">
-      <CreateCommunityForm />
-      <Suspense fallback={<div>Carregando comunidades...</div>}>
-        <CommunitiesList />
-      </Suspense>
+    <div className="container mx-auto h-[calc(100vh-120px)] overflow-hidden flex flex-col">
+      <div className="flex justify-between items-center py-6 bg-background">
+        <h1 className="text-2xl font-bold">Minhas Comunidades</h1>
+        <AddCommunityButton />
+      </div>
+      <div className="flex-1 overflow-y-auto">
+        <BentoGridDemo />
+      </div>
     </div>
   );
 }

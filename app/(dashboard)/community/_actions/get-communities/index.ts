@@ -8,6 +8,8 @@ export type Community = {
   admin_id: string;
   members_count: number;
   created_at: string;
+  description: string | null; 
+  image: string | null;
 };
 
 export async function getCommunities() {
