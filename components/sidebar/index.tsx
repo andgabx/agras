@@ -82,13 +82,13 @@ export default function SidebarDemo() {
               <Logo />
             </>
             <div className="mt-8 flex flex-col gap-2 ">
-              {pathname === "/community" && (
+              {pathname === "/communities" && (
                 <SidebarLink key={0} link={links[0]} />
               )}
 
-              {pathname !== "/community" &&
+              {pathname !== "/communities" &&
                 links
-                  .slice(1)
+                  .slice(1, 6)
                   .map((link, idx) => (
                     <SidebarLink key={idx + 1} link={link} />
                   ))}
