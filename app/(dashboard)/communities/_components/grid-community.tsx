@@ -3,7 +3,7 @@ import { IconUsers } from "@tabler/icons-react";
 import { getCommunities } from "../_actions/get-communities";
 
 const Placeholderteste = () => (
-  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
+  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-primary"></div>
 );
 
 export async function BentoGridDemo() {
@@ -15,7 +15,7 @@ export async function BentoGridDemo() {
         <BentoGridItem
           key={community.id}
           title={community.name}
-          creator_name={ community.creator_name}
+          creator_name={community.creator_name}
           description={community.description || "Sem descrição"}
           city={community?.city || "Sem cidade"}
           state={community?.state || "Sem estado"}

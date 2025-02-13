@@ -20,7 +20,6 @@ interface CreateCommunityFormProps {
 }
 
 export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
-
   async function handleSubmit(formData: FormData) {
     try {
       await createCommunity(formData);
@@ -29,7 +28,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
     } catch (error) {
       console.error(error);
       toast.error("Erro ao criar comunidade");
-    } 
+    }
   }
 
   return (
@@ -53,7 +52,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
             <Textarea
               name="description"
               placeholder="Descrição da comunidade"
-              className="border-primary rounded-md"
+              className="border-primary"
             />
           </div>
           <Label htmlFor="city">Cidade*</Label>
