@@ -56,6 +56,20 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
               className="border-primary rounded-md"
             />
           </div>
+          <Label htmlFor="city">Cidade*</Label>
+          <Input
+            type="text"
+            name="city"
+            placeholder="Cidade da comunidade"
+            required
+          />
+          <Label htmlFor="state">Estado*</Label>
+          <Input
+            type="text"
+            name="state"
+            placeholder="Estado da comunidade"
+            required
+          />
           <div className="flex justify-between gap-2">
             <DialogClose asChild>
               <Button className="w-full" variant="outline">

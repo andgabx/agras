@@ -23,6 +23,8 @@ export const BentoGridItem = ({
   className,
   title,
   description,
+  city,
+  state,
   header,
   icon,
 }: {
@@ -31,6 +33,8 @@ export const BentoGridItem = ({
   description?: string | React.ReactNode;
   header?: React.ReactNode;
   icon?: React.ReactNode;
+  city?: string;
+  state?: string;
 }) => {
   return (
     <div
@@ -47,6 +51,12 @@ export const BentoGridItem = ({
         </div>
         <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">
           {description}
+        </div>
+        <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">
+          {city}
+        </div>
+        <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">
+          {state}
         </div>
       </div>
     </div>

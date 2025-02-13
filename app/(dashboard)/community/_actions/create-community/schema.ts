@@ -7,6 +7,8 @@ export const CreateCommunitySchema = z.object({
     .string()
     .max(60, "Descrição máxima de 60 caracteres")
     .optional(),
+  city: z.string().min(1, "Cidade é obrigatória"),
+  state: z.string().min(1, "Estado é obrigatório"),
 });
 
 export type CreateCommunityInput = z.infer<typeof CreateCommunitySchema>;

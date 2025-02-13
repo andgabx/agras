@@ -10,6 +10,8 @@ export type Community = {
   created_at: string;
   description: string | null; 
   image: string | null;
+  city: string | null;
+  state: string | null;
 };
 
 export async function getCommunities() {

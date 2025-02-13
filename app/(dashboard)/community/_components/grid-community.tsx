@@ -16,6 +16,8 @@ export async function BentoGridDemo() {
           key={community.id}
           title={community.name}
           description={community.description || "Sem descrição"}
+          city={community?.city || "Sem cidade"}
+          state={community?.state || "Sem estado"}
           header={<Placeholderteste />}
           icon={<IconUsers className="h-4 w-4 text-neutral-500" />}
           className="relative"
