@@ -11,6 +11,7 @@ interface Links {
   label: string;
   href: string;
   icon: React.JSX.Element | React.ReactNode;
+  onClick?: () => void;
 }
 
 interface SidebarContextProps {
@@ -180,6 +181,12 @@ export const SidebarLink = ({
           isActive && "bg-white",
           className
         )}
+        onClick={(e) => {
+          if (link.onClick) {
+            e.preventDefault();
+            link.onClick();
+          }
+        }}
         {...props}
       >
         <span
