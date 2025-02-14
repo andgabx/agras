@@ -13,6 +13,7 @@ export type Community = {
   city: string | null;
   state: string | null;
   creator_name: string;
+  members: Array<string>;
 };
 export async function getCommunities() {
   const supabase = await createClient();

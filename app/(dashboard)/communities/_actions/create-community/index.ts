@@ -8,9 +8,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
   const supabase = await createClient();
 
   // Obter o usuário atual
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data: { user }, } = await supabase.auth.getUser();
 
   if (!user) {
     throw new Error("Usuário não autenticado.");
@@ -23,6 +21,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
   const description = formData.get("description")?.toString().trim();
   const city = formData.get("city")?.toString().trim();
   const state = formData.get("state")?.toString().trim();
+  const members = [{ id: admin_id, name: creator_name }];
 
   const { success } = CreateCommunitySchema.safeParse({
     name,
@@ -31,6 +30,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     city,
     state,
     creator_name,
+    members
   });
 
   if (!success) {
@@ -61,8 +61,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     city,
     state,
     creator_name,
-    // members_count será 1 por padrão
-    // created_at será preenchido automaticamente
+    members
   });
 
   if (insertError) {
