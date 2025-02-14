@@ -14,7 +14,6 @@ export const CreateCommunitySchema = z.object({
     id: z.string().uuid("ID do membro inválido"),
     name: z.string().min(1, "Nome do membro é obrigatório"),
   })).min(1, "Deve haver pelo menos um membro"),
-  members_count: z.number()
 });
 
 export type CreateCommunityInput = z.infer<typeof CreateCommunitySchema>;

@@ -4,7 +4,7 @@ import { getCommunities } from "../_actions/get-communities";
 import { ClientBentoItem } from "./ClientBentoItem";
 
 const Placeholderteste = () => (
-  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-primary"></div>
+  <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-xl bg-primary"></div>
 );
 
 export async function BentoGridDemo() {
@@ -22,7 +22,6 @@ export async function BentoGridDemo() {
           city={community?.city || "Sem cidade"}
           state={community?.state || "Sem estado"}
           header={<Placeholderteste />}
-          icon={<IconUsers className="h-4 w-4 text-neutral-500" />}
           className="relative"
        />
       ))}
