@@ -1,6 +1,7 @@
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { IconUsers } from "@tabler/icons-react";
 import { getCommunities } from "../_actions/get-communities";
+import { ClientBentoItem } from "./ClientBentoItem";
 
 const Placeholderteste = () => (
   <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-primary"></div>
@@ -10,9 +11,10 @@ export async function BentoGridDemo() {
   const communities = await getCommunities();
 
   return (
-    <BentoGrid className=" mx-auto mt-8">
-      {communities.map((community, index) => (
-        <BentoGridItem
+    <BentoGrid className="mx-auto mt-8">
+      {communities.map((community) => (
+        <ClientBentoItem 
+          community={community}
           key={community.id}
           title={community.name}
           creator_name={community.creator_name}
@@ -22,8 +24,8 @@ export async function BentoGridDemo() {
           header={<Placeholderteste />}
           icon={<IconUsers className="h-4 w-4 text-neutral-500" />}
           className="relative"
-        />
-        ))}
+       />
+      ))}
     </BentoGrid>
   );
 }
