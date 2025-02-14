@@ -105,7 +105,7 @@ export default function SidebarDemo() {
 export const Logo = () => {
   return (
     <Link
-      href="/dashboard"
+      href="/communities"
       className="font-normal mx-auto flex space-x-2 items-center bg-[#8ABF17] text-sm text-white py-4 relative z-20"
     >
       <motion.span
