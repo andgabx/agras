@@ -5,7 +5,8 @@ import { Label } from "@/components/ui/label";
 import { Camera, Link } from "lucide-react";
 import { Pencil } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
-
+import updateAccount from "../_actions/update-account";
+import { SubmitButton } from "@/components/submit-button";
 
 const Form = async () => {
   const supabase = await createClient();
@@ -68,6 +69,7 @@ const Form = async () => {
                 <Label htmlFor="fullName">Nome completo*</Label>
                 <Input
                   id="fullName"
+                  name="full_name"
                   defaultValue={user?.user_metadata?.full_name}
                 />
               </div>
@@ -76,25 +78,38 @@ const Form = async () => {
                 <Label htmlFor="username">Nome de usuário*</Label>
                 <Input
                   id="username"
+                  name="username"
                   defaultValue={user?.user_metadata?.username}
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="email">Email*</Label>
-                <Input id="email" type="email" defaultValue={user?.email} />
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  defaultValue={user?.email}
+                />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="phone">Telefone</Label>
-                <Input id="phone" defaultValue={user?.user_metadata?.phone} />
+                <Input
+                  id="phone"
+                  name="phone"
+                  defaultValue={user?.user_metadata?.phone}
+                />
               </div>
 
               <div className="md:col-span-2 flex justify-end gap-4 pt-4">
                 <Button variant="outline">Cancelar</Button>
-                <Button className="bg-primary hover:bg-primary/90">
+                <SubmitButton
+                  formAction={updateAccount}
+                  className="bg-primary hover:bg-primary/90"
+                >
                   Salvar
-                </Button>
+                </SubmitButton>
                 <Button variant="outline">
                   <a href="/protected/reset-password">Mudar senha</a>
                 </Button>
