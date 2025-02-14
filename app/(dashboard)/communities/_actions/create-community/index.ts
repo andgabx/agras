@@ -30,7 +30,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     city,
     state,
     creator_name,
-    members
+    members,
   });
 
   if (!success) {
