@@ -131,7 +131,7 @@ export const resetPasswordAction = async (formData: FormData) => {
     );
   }
 
-  encodedRedirect("success", "/protected/reset-password", "Password updated");
+  encodedRedirect("success", "/communities", "Senha atualizada com sucesso");
 };
 
 export const signOutAction = async () => {

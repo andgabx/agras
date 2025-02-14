@@ -1,36 +1,43 @@
+"use client";
+
 import { resetPasswordAction } from "@/app/actions";
 import { FormMessage, Message } from "@/components/form-message";
 import { SubmitButton } from "@/components/submit-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 export default async function ResetPassword(props: {
   searchParams: Promise<Message>;
 }) {
   const searchParams = await props.searchParams;
+  const handleChangePassword = async (formData: FormData) => {
+    await resetPasswordAction(formData);
+    toast.success("Senha atualizada com sucesso");
+  };
   return (
-    <div className="my-auto">
-      <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4 m-auto">
-        <h1 className="text-2xl font-medium">Reset password</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <form className="flex flex-col w-full max-w-md p-8 gap-4 bg-card rounded-lg shadow-lg">
+        <h1 className="text-2xl font-medium">Mudar</h1>
         <p className="text-sm text-foreground/60">
-          Please enter your new password below.
+          Por favor, insira sua nova senha abaixo.
         </p>
-        <Label htmlFor="password">New password</Label>
+        <Label htmlFor="password">Nova senha</Label>
         <Input
           type="password"
           name="password"
-          placeholder="New password"
+          placeholder="Nova senha"
           required
         />
-        <Label htmlFor="confirmPassword">Confirm password</Label>
+        <Label htmlFor="confirmPassword">Confirmar senha</Label>
         <Input
           type="password"
           name="confirmPassword"
-          placeholder="Confirm password"
+          placeholder="Confirmar senha"
           required
         />
-        <SubmitButton formAction={resetPasswordAction}>
-          Reset password
+        <SubmitButton formAction={handleChangePassword}>
+          Mudar senha
         </SubmitButton>
         <FormMessage message={searchParams} />
       </form>

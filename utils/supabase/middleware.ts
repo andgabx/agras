@@ -41,7 +41,8 @@ export const updateSession = async (request: NextRequest) => {
 
     const isProtectedRoute =
       request.nextUrl.pathname.startsWith("/communities") ||
-      request.nextUrl.pathname.startsWith("/dashboard");
+      request.nextUrl.pathname.startsWith("/dashboard") ||
+      request.nextUrl.pathname.startsWith("/protected/reset-password");
 
     // protected routes
     if (isProtectedRoute && user.error){
