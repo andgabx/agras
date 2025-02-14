@@ -50,7 +50,7 @@ export default function SidebarDemo() {
     },
     {
       label: "Meu Perfil",
-      href: "/participantes",
+      href: "/account",
       icon: (
         <UserRoundPen className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
