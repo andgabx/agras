@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { SubmitButton } from "@/components/submit-button";
 
 interface CreateCommunityFormProps {
   onSuccess?: () => void;
@@ -39,7 +40,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form action={handleSubmit} className="space-y-4">
+        <form className="space-y-4">
           <div>
             <Label htmlFor="name">Nome*</Label>
             <Input
@@ -75,9 +76,9 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
                 Cancelar
               </Button>
             </DialogClose>
-            <Button className="w-full" type="submit">
+            <SubmitButton formAction={handleSubmit} className="w-full">
               Criar Comunidade
-            </Button>
+            </SubmitButton>
           </div>
         </form>
       </CardContent>

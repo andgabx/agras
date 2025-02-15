@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import CommunityList from "./_components/community-list";
 import AddCommunityButton from "./_components/add-community-button";
 import { BentoGridDemo } from "./_components/grid-community";
+import { ScrollShadow } from "@heroui/scroll-shadow";
 // Componente para exibir a lista de comunidades
 
 // Página principal
@@ -12,8 +13,10 @@ export default function CommunityPage() {
         <h1 className="text-2xl font-bold">Minhas Comunidades</h1>
         <AddCommunityButton />
       </div>
-      <div className="flex-1 overflow-y-auto">
-        <BentoGridDemo />
+      <div className="flex-1">
+        <ScrollShadow size={30} className="h-[calc(100vh-120px)]">
+          <BentoGridDemo />
+        </ScrollShadow>
       </div>
     </div>
   );

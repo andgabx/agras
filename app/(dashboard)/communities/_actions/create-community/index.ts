@@ -68,5 +68,5 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     throw new Error("Erro ao criar a comunidade: " + insertError.message);
   }
 
-  revalidatePath("/community");
+  revalidatePath("/communities");
 };

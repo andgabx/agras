@@ -2,6 +2,7 @@
 
 import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 
 const updateAccount = async (formData: FormData) => {
   const supabase = await createClient();
@@ -24,6 +25,8 @@ const updateAccount = async (formData: FormData) => {
       phone: phone,
     },
   });
+
+  revalidatePath("/account");
 
   if (error) {
     return encodedRedirect(
