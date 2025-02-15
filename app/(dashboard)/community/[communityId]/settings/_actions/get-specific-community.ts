@@ -6,7 +6,7 @@ export async function getCommunity(id: string) {
   try {
     const { data: community, error } = await supabase
       .from("communities")
-      .select("id, name, description")
+      .select("id, name, description, created_at")
       .eq("id", id)
       .single();
 
