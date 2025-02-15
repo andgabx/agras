@@ -14,10 +14,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { signOutAction } from "@/app/actions";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 
 export default function SidebarDemo() {
   const pathname = usePathname();
+  const params = useParams();
+  const communityId = params?.communityId as string;
 
   const links = [
     {
@@ -57,7 +59,7 @@ export default function SidebarDemo() {
     },
     {
       label: "Configuraçoes",
-      href: "/configuracoes",
+      href: communityId ? `/community/${communityId}/settings` : "#",
       icon: (
         <Settings className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
