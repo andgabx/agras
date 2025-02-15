@@ -89,8 +89,8 @@ const Form = async () => {
                   id="email"
                   name="email"
                   type="email"
-                  disabled
                   defaultValue={user?.email}
+                  disabled
                 />
               </div>
 
