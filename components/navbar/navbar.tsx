@@ -7,22 +7,31 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { ThemeSwitcher } from "../theme-switcher";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { set } from "zod";
 
 export function Navbar() {
   const [user, setUser] = useState<any>(null);
+  const [community, setCommunity] = useState<any>(null);
+  const pathName = usePathname();
 
   useEffect(() => {
+    const supabase = createClient();
     const getUser = async () => {
-      const supabase = createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      const { data: { user } } = await supabase.auth.getUser();
       setUser(user);
     };
 
+    const getCommunity = async () => { 
+      const communityId = pathName.split("/")[2];
+      const {data, error} = await supabase.from("communities").select("*").eq("id", communityId);
+      if (data) {
+        setCommunity(data[0].name);
+      }
+    }
+    getCommunity();
     getUser();
   }, []);
 
@@ -30,10 +39,10 @@ export function Navbar() {
     <div className="border-b">
       <div className="flex h-20 items-center px-4">
         <div className="flex flex-col ml-2 items-start">
-          <span className="text-sm text-muted-foreground font-medium">
-            COMUNIDADE
+          <span className="text-sm text-black font-medium">
+            {pathName === "/communities" ? <span className="font-medium">ENTRE EM UMA</span> : <span className="font-medium">COMUNIDADE</span>}
           </span>
-          <h2 className="text-lg font-bold sm:text-xl">Coletivo Raio de Sol</h2>
+          <h2 className="text-lg font-bold sm:text-xl">{pathName === "/communities" ? <span className="font-bold">Comunidade</span> : <span className="font-bold">{community}</span>}</h2>
           {/* <ThemeSwitcher /> */}
         </div>
 
