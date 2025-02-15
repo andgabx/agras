@@ -8,6 +8,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function Login(props: { searchParams: Promise<Message> }) {
+  
   const searchParams = await props.searchParams;
   return (
     <div className="flex h-screen">

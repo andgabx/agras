@@ -30,7 +30,10 @@ const LeaveCommunity = ({ community }: { community: any }) => {
             serviços da plataforma.
           </p>
           <div className="flex justify-end">
-            <Button variant="destructive">Sair da Comunidade</Button>
+            <Button
+              variant="destructive"
+            >
+              Sair da Comunidade</Button>
           </div>
         </div>
       </CardContent>

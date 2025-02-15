@@ -2,13 +2,24 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { updateCommunity } from "../_actions/update-community";
 import { toast } from "sonner";
 import { SubmitButton } from "@/components/submit-button";
 import { deleteCommunity } from "../_actions/delete-community";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { AlertCircle, AlertTriangle } from "lucide-react";
 
 export default function CommunitySettingsFormClient({
   community,
@@ -75,13 +86,43 @@ export default function CommunitySettingsFormClient({
 
             <div className="flex justify-between pt-4">
               <div className="space-x-2">
-                <SubmitButton
-                  formAction={handleDelete}
-                  type="submit"
-                  variant="destructive"
-                >
-                  Excluir
-                </SubmitButton>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="destructive">Excluir</Button>
+                  </DialogTrigger>
+                  <DialogContent className="w-full">
+                    <DialogHeader>
+                      <DialogTitle hidden className="py-4">
+                        Excluir Comunidade
+                      </DialogTitle>
+                    </DialogHeader>
+                    <DialogDescription className="text-red-500 text-center text-lg font-bold">
+                      Tem certeza que deseja excluir a comunidade{" "}
+                      {community.name}?
+                      <br />
+                      <br />
+                      <span className="text-md text-center text-red-500 font-bold flex gap-2">
+                        <AlertCircle className="text-red-500 w-6 h-6" />
+                        Cuidado! Os dados dessa comunidade serão perdidos.
+                      </span>
+                    </DialogDescription>
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button variant="outline">Cancelar</Button>
+                      </DialogClose>
+                      <form action={handleDelete}>
+                        <input
+                          type="hidden"
+                          name="communityId"
+                          value={community.id}
+                        />
+                        <Button type="submit" variant="destructive">
+                          Excluir
+                        </Button>
+                      </form>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
               <div className="space-x-2">
                 <SubmitButton
