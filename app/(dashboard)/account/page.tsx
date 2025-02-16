@@ -1,7 +1,7 @@
 import Form from "./_components/form";
 const AccountPage = () => {
   return (
-    <div>
+    <div className="">
       <Form />
     </div>
   );

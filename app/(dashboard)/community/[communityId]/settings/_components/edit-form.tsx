@@ -19,7 +19,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, AlertTriangle } from "lucide-react";
+import { AlertCircle, AlertTriangle, Info, Loader2, Save, Settings } from "lucide-react";
 
 export default function CommunitySettingsFormClient({
   community,
@@ -53,12 +53,16 @@ export default function CommunitySettingsFormClient({
   };
 
   return (
-    <form className="grid">
-      <Card>
-        <CardHeader>
-          <CardTitle>Configurações da Comunidade {community.name}</CardTitle>
+    <form className="grid gap-6 w-full lg:max-w-2xl">
+      <Card className="relative">
+        <CardHeader className="pb-4 border-b">
+          <CardTitle className="text-xl flex items-center gap-2">
+            <Settings className="w-5 h-5" />
+            Configurações da Comunidade
+            <span className="text-primary font-bold">{community.name}</span>
+          </CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <div className="space-y-6">
             <div className="space-y-2 hidden">
               <Label>Comunidade id</Label>
@@ -69,70 +73,97 @@ export default function CommunitySettingsFormClient({
                 defaultValue={community.id}
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="name">Nome da Comunidade</Label>
-              <Input id="name" name="name" defaultValue={community.name} />
+            
+            <div className="space-y-4">
+              <Label htmlFor="name" className="text-sm font-medium">
+                Nome da Comunidade
+              </Label>
+              <Input 
+                id="name" 
+                name="name" 
+                defaultValue={community.name}
+                className="focus-visible:ring-primary"
+              />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="description">Descrição da Comunidade</Label>
+            <div className="space-y-4">
+              <Label htmlFor="description" className="text-sm font-medium">
+                Descrição
+              </Label>
               <Textarea
                 id="description"
                 name="description"
                 defaultValue={community.description ?? ""}
-                className="min-h-[100px]"
+                className="min-h-[120px] focus-visible:ring-primary"
+                placeholder="Descreva os objetivos e propósito da comunidade..."
               />
             </div>
 
-            <div className="flex justify-between pt-4">
-              <div className="space-x-2">
-                <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant="destructive">Excluir</Button>
-                  </DialogTrigger>
-                  <DialogContent className="w-full">
-                    <DialogHeader>
-                      <DialogTitle hidden className="py-4">
-                        Excluir Comunidade
-                      </DialogTitle>
-                    </DialogHeader>
-                    <DialogDescription className="text-red-500 text-center text-lg font-bold">
-                      Tem certeza que deseja excluir a comunidade{" "}
-                      {community.name}?
-                      <br />
-                      <br />
-                      <span className="text-md text-center text-red-500 font-bold flex gap-2">
-                        <AlertCircle className="text-red-500 w-6 h-6" />
-                        Cuidado! Os dados dessa comunidade serão perdidos.
-                      </span>
-                    </DialogDescription>
-                    <DialogFooter>
-                      <DialogClose asChild>
-                        <Button variant="outline">Cancelar</Button>
-                      </DialogClose>
-                      <form action={handleDelete}>
-                        <input
-                          type="hidden"
-                          name="communityId"
-                          value={community.id}
-                        />
-                        <Button type="submit" variant="destructive">
-                          Excluir
-                        </Button>
-                      </form>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-              </div>
-              <div className="space-x-2">
-                <SubmitButton
-                  formAction={handleSubmit}
-                  type="submit"
-                  className="bg-primary hover:bg-primary/90"
-                >
-                  Atualizar
-                </SubmitButton>
-              </div>
+            <div className="flex flex-col-reverse sm:flex-row justify-between gap-4 pt-8 border-t">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button 
+                    variant="destructive" 
+                    className="gap-2 w-full sm:w-auto"
+                  >
+                    <AlertTriangle className="w-4 h-4" />
+                    Excluir Comunidade
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-destructive flex items-center gap-2">
+                      <AlertTriangle className="w-5 h-5" />
+                      Excluir Comunidade
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <p className="text-foreground">
+                      Tem certeza que deseja excluir permanentemente a comunidade{" "}
+                      <span className="font-semibold text-destructive">
+                        {community.name}
+                      </span>?
+                    </p>
+                    <div className="flex items-center gap-3 p-4 bg-destructive/10 text-destructive rounded-lg">
+                      <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                      <p className="text-sm">
+                        Todos os dados associados serão permanentemente removidos.
+                        Esta ação não pode ser desfeita.
+                      </p>
+                    </div>
+                  </div>
+                  <DialogFooter className="gap-2 sm:gap-0">
+                    <DialogClose asChild>
+                      <Button variant="outline" className="w-full">
+                        Cancelar
+                      </Button>
+                    </DialogClose>
+                    <form action={handleDelete} className="w-full">
+                      <input
+                        type="hidden"
+                        name="communityId"
+                        value={community.id}
+                      />
+                      <Button 
+                        type="submit" 
+                        variant="destructive"
+                        className="w-full gap-2"
+                      >
+                        <AlertTriangle className="w-4 h-4" />
+                        Confirmar Exclusão
+                      </Button>
+                    </form>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
+              <SubmitButton
+                formAction={handleSubmit}
+                className="w-full sm:w-auto bg-primary hover:bg-primary/90 gap-2"
+              >
+                <Save className="w-4 h-4" />
+                Salvar Alterações
+              </SubmitButton>
             </div>
           </div>
         </CardContent>

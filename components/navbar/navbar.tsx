@@ -10,13 +10,15 @@ import {
 } from "@/components/ui/navigation-menu";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { set } from "zod";
 
 export function Navbar() {
   const [user, setUser] = useState<any>(null);
   const [community, setCommunity] = useState<any>(null);
   const pathName = usePathname();
+  const params = useParams();
+  const communityId = params?.communityId as string;
 
   useEffect(() => {
     const supabase = createClient();
@@ -70,43 +72,42 @@ export function Navbar() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-
-          <div className="flex items-center space-x-2 cursor-pointer p-1 rounded-lg hover:bg-[#c0c0c046]">
-            <Link href="/account">
+          
+          <Link href={communityId ? `#` : "/account"}>
+            <div className="flex items-center space-x-2 cursor-pointer p-1 rounded-lg hover:bg-[#c0c0c046]">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="" />
-                {/* Fiz aqui embaixo um fallback pegando a primeira letra do nome do usuario que ele colocou no supabase, caso nao tenha como botar foto futuramente */}
                 <AvatarFallback className="bg-[#8ABF17] text-white font-semibold">
                   {user?.user_metadata.full_name?.charAt(0)}
                 </AvatarFallback>
               </Avatar>
-            </Link>
 
-            {/* Informações do usuário - Oculto em mobile */}
-            <div className="hidden sm:flex sm:flex-col">
-              <span className="text-sm font-medium truncate max-w-[120px]">
-                {user?.user_metadata.full_name
-                  .split(" ")
-                  .filter((name: string) => name.trim().length > 0)
-                  .reduce(
-                    (
-                      acc: string,
-                      curr: string,
-                      index: number,
-                      arr: Array<number>
-                    ) => {
-                      if (index === 0) return curr; // Primeiro nome
-                      if (index === arr.length - 1) return acc + " " + curr; // Último nome
-                      return acc;
-                    },
-                    ""
-                  )}
-              </span>
-              <span className="text-xs text-muted-foreground truncate max-w-[120px]">
-                {user?.email}
-              </span>
+              {/* Informações do usuário - Oculto em mobile */}
+              <div className="hidden sm:flex sm:flex-col">
+                <span className="text-sm font-medium truncate max-w-[120px]">
+                  {user?.user_metadata.full_name
+                    .split(" ")
+                    .filter((name: string) => name.trim().length > 0)
+                    .reduce(
+                      (
+                        acc: string,
+                        curr: string,
+                        index: number,
+                        arr: Array<number>
+                      ) => {
+                        if (index === 0) return curr; // Primeiro nome
+                        if (index === arr.length - 1) return acc + " " + curr; // Último nome
+                        return acc;
+                      },
+                      ""
+                    )}
+                </span>
+                <span className="text-xs text-muted-foreground truncate max-w-[120px]">
+                  {user?.email}
+                </span>
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

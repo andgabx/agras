@@ -9,7 +9,7 @@ export default async function Settings({
 }) {
   const community = await getCommunity(params.communityId);
   return (
-    <div className="h-full flex gap-4">
+    <div className="h-full flex flex-col lg:flex-row gap-4">
       <CommunitySettingsCard communityId={params.communityId} />
       <LeaveCommunity community={community} />
     </div>

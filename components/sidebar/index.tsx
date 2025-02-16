@@ -31,14 +31,14 @@ export default function SidebarDemo() {
     },
     {
       label: "Dashboard",
-      href: "/dashboard",
+      href: communityId ? `/community/${communityId}/dashboard` : "#",
       icon: (
         <LayoutDashboard className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
     },
     {
       label: "Areas de Plantio",
-      href: "#",
+      href: communityId ? `/community/${communityId}/areas` : "#",
       icon: (
         <Trees className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
@@ -52,7 +52,7 @@ export default function SidebarDemo() {
     },
     {
       label: "Meu Perfil",
-      href: "/account",
+      href: communityId ? `/community/${communityId}/account` : "/account",
       icon: (
         <UserRoundPen className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
       ),
@@ -88,7 +88,11 @@ export default function SidebarDemo() {
                 <SidebarLink key={0} link={links[0]} />
               )}
 
-              {pathname !== "/communities" &&
+              {pathname === "/account" && (
+                <SidebarLink key={0} link={links[4]} />
+              )}
+
+              {pathname !== "/communities" && pathname !== "/account" &&
                 links
                   .slice(1, 6)
                   .map((link, idx) => (
