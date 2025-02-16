@@ -51,6 +51,13 @@ export default function SidebarDemo() {
       ),
     },
     {
+      label: "Participantes",
+      href: communityId ? `/community/${communityId}/participantes` : "#",
+      icon: (
+        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+      ),
+    },
+    {
       label: "Meu Perfil",
       href: communityId ? `/community/${communityId}/account` : "/account",
       icon: (
@@ -94,7 +101,7 @@ export default function SidebarDemo() {
 
               {pathname !== "/communities" && pathname !== "/account" &&
                 links
-                  .slice(1, 6)
+                  .slice(1, 7)
                   .map((link, idx) => (
                     <SidebarLink key={idx + 1} link={link} />
                   ))}

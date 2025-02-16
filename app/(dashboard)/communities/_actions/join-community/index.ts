@@ -40,7 +40,8 @@ export async function joinCommunity(
     // 4. Preparar atualização
     const newMember = {
       id: user.id,
-      name: user.user_metadata.full_name || user.email,
+      name: user.user_metadata.full_name,
+      email: user.email,
     };
 
     // 5. Executar update transacional
