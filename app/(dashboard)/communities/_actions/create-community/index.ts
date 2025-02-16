@@ -21,7 +21,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
   const description = formData.get("description")?.toString().trim();
   const city = formData.get("city")?.toString().trim();
   const state = formData.get("state")?.toString().trim();
-  const members = [{ id: admin_id, name: creator_name }];
+  const members = [{ id: admin_id, name: creator_name, email: user.email }];
 
   const { success } = CreateCommunitySchema.safeParse({
     name,

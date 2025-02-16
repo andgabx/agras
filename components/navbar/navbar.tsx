@@ -10,13 +10,15 @@ import {
 } from "@/components/ui/navigation-menu";
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useParams } from "next/navigation";
 import { set } from "zod";
+import { ThemeSwitcher } from "../theme-switcher";
 
 export function Navbar() {
   const [user, setUser] = useState<any>(null);
-  const [community, setCommunity] = useState<any>(null);
+  const [communityName, setCommunityName] = useState("");
   const pathName = usePathname();
+  const params = useParams();
 
   useEffect(() => {
     const supabase = createClient();
@@ -27,39 +29,44 @@ export function Navbar() {
       setUser(user);
     };
 
-    const getCommunity = async () => {
-      const communityId = pathName.split("/")[2];
-      const { data, error } = await supabase
-        .from("communities")
-        .select("*")
-        .eq("id", communityId);
-      if (data) {
-        setCommunity(data[0].name);
+    async function getCommunityName() {
+      if (params.communityId) {
+        const { data } = await supabase
+          .from("communities")
+          .select("name")
+          .eq("id", params.communityId)
+          .single();
+
+        if (data) {
+          setCommunityName(data.name);
+        }
       }
-    };
-    getCommunity();
+    }
+
+    getCommunityName();
     getUser();
-  }, []);
+  }, [params.communityId]);
 
   return (
     <div className="border-b">
       <div className="flex h-20 items-center px-4">
         <div className="flex flex-col ml-2 items-start">
           <span className="text-sm text-black font-medium">
-            {pathName === "/communities" ? (
-              <span className="font-medium">ENTRE EM UMA</span>
+            {pathName === "/account" ? (
+              <span className="font-medium">MEU PERFIL</span>
             ) : (
-              <span className="font-medium">COMUNIDADE</span>
+              <span className="font-medium">
+                {pathName === "/communities"
+                  ? "Comunidades"
+                  : params.communityId
+                    ? `Comunidade ${communityName}`
+                    : pathName === "/dashboard"
+                      ? "Dashboard"
+                      : "Carregando..."}
+              </span>
             )}
           </span>
-          <h2 className="text-lg font-bold sm:text-xl">
-            {pathName === "/communities" ? (
-              <span className="font-bold">Comunidade</span>
-            ) : (
-              <span className="font-bold">{community}</span>
-            )}
-          </h2>
-          {/* <ThemeSwitcher /> */}
+          {/* <ThemeSwitcher />  */}
         </div>
 
         <div className="ml-auto flex items-center space-x-2 sm:space-x-4">

@@ -13,6 +13,7 @@ export const CreateCommunitySchema = z.object({
   members: z.array(z.object({
     id: z.string().uuid("ID do membro inválido"),
     name: z.string().min(1, "Nome do membro é obrigatório"),
+    email: z.string().email("Email do membro inválido"),
   })).min(1, "Deve haver pelo menos um membro"),
 });
 
