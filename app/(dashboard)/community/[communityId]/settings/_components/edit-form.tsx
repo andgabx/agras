@@ -161,7 +161,7 @@ export default function CommunitySettingsFormClient({
                 formAction={handleSubmit}
                 className="w-full sm:w-auto bg-primary hover:bg-primary/90 gap-2"
               >
-                <Save className="w-4 h-4" />
+                <Save className="w-4 h-4 mr-2" />
                 Salvar Alterações
               </SubmitButton>
             </div>
