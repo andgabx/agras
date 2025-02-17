@@ -15,6 +15,7 @@ export type Community = {
   creator_name: string;
   members: Array<string>;
 };
+
 export async function getCommunities() {
   const supabase = await createClient();
 

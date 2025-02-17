@@ -28,7 +28,6 @@ export function ClientBentoItem({ community, ...props }: BentoGridItemProps & {
 
   const handleClick = async () => {
     const result = await joinCommunity(community.id);
-    console.log(isMember)
     if (result.error === "Você já é membro") {
       router.push(`community/${community.id}/dashboard/`)
     }
