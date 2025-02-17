@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { Sidebar, SidebarBody, SidebarLink } from "@/components/ui/sidebar";
 import {
@@ -9,6 +10,7 @@ import {
   Settings,
   Trees,
   UserRoundPen,
+  Undo2,
 } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -26,49 +28,49 @@ export default function SidebarDemo() {
       label: "Comunidades",
       href: "/communities",
       icon: (
-        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
     {
       label: "Dashboard",
       href: communityId ? `/community/${communityId}/dashboard` : "#",
       icon: (
-        <LayoutDashboard className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <LayoutDashboard className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
     {
-      label: "Areas de Plantio",
+      label: "Áreas de Plantio",
       href: communityId ? `/community/${communityId}/areas` : "#",
       icon: (
-        <Trees className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <Trees className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
     {
       label: "Tarefas",
       href: "/tarefas",
       icon: (
-        <CalendarCheck className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <CalendarCheck className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
     {
       label: "Participantes",
       href: communityId ? `/community/${communityId}/participantes` : "#",
       icon: (
-        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <Users className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
     {
       label: "Meu Perfil",
       href: communityId ? `/community/${communityId}/account` : "/account",
       icon: (
-        <UserRoundPen className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <UserRoundPen className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
     {
-      label: "Configuraçoes",
+      label: "Configurações",
       href: communityId ? `/community/${communityId}/settings` : "#",
       icon: (
-        <Settings className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <Settings className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
     {
@@ -76,7 +78,7 @@ export default function SidebarDemo() {
       href: "#",
       onClick: signOutAction,
       icon: (
-        <LogOut className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-[#8ABF17]" />
+        <LogOut className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
       ),
     },
   ];
@@ -99,7 +101,8 @@ export default function SidebarDemo() {
                 <SidebarLink key={0} link={links[4]} />
               )}
 
-              {pathname !== "/communities" && pathname !== "/account" &&
+              {pathname !== "/communities" &&
+                pathname !== "/account" &&
                 links
                   .slice(1, 7)
                   .map((link, idx) => (
@@ -108,6 +111,17 @@ export default function SidebarDemo() {
             </div>
           </div>
           <div className="py-4">
+            {pathname.startsWith(`/community/${communityId}`) && (
+              <SidebarLink
+                link={{
+                  label: "Comunidades",
+                  href: "/communities",
+                  icon: (
+                    <Undo2 className="h-[27px] w-[27px] flex-shrink-0 transition-colors group-hover:text-primary" />
+                  ),
+                }}
+              />
+            )}
             <SidebarLink link={links[links.length - 1]} />
           </div>
         </SidebarBody>
@@ -119,7 +133,7 @@ export const Logo = () => {
   return (
     <Link
       href="/communities"
-      className="font-normal mx-auto flex space-x-2 items-center bg-[#8ABF17] text-sm text-white py-4 relative z-20"
+      className="font-normal mx-auto flex space-x-2 items-center bg-primary text-sm text-white py-4 relative z-20"
     >
       <motion.span
         initial={{ opacity: 0 }}

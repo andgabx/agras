@@ -14,7 +14,7 @@ export default function CommunityPage() {
         <AddCommunityButton />
       </div>
       <div className="flex-1">
-        <ScrollShadow size={30} className="h-[calc(100vh-120px)]">
+        <ScrollShadow size={30} className="h-[calc(100vh-220px)]">
           <BentoGridDemo />
         </ScrollShadow>
       </div>

@@ -13,7 +13,7 @@ export async function BentoGridDemo() {
   return (
     <>
       {communities.length === 0 ? (
-        <div className="flex flex-col items-center justify-center min-h-[200px] p-8 text-center space-y-8">
+        <div className="flex flex-col items-center justify-center min-h-[200px] py-8 text-center space-y-8">
           <Image src="/no-community-image.png" alt="Logo" width={300} height={300} />
           <h3 className="text-xl font-semibold mb-2">
             Nenhuma comunidade encontrada

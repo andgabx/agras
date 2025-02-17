@@ -68,7 +68,7 @@ export function CreateAreaForm({ onSuccess }: CreateAreaFormProps) {
               </Button>
             </DialogClose>
             <SubmitButton formAction={handleSubmit} className="w-full">
-              Criar Area
+              Criar Área
             </SubmitButton>
           </div>
         </form>

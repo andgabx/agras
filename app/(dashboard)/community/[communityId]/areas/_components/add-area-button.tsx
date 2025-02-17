@@ -20,7 +20,7 @@ const AddAreaButton = () => {
       </DialogTrigger>
       <DialogContent>
         <DialogTitle className="text-primary font-bold">
-          Criar Area
+          Criar Área
         </DialogTitle>
         <CreateAreaForm onSuccess={() => setOpen(false)} />
       </DialogContent>

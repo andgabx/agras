@@ -67,7 +67,7 @@ export function Navbar() {
               </span>
             )}
           </span>
-          {/* <ThemeSwitcher />  */}
+           
         </div>
 
         <div className="ml-auto flex items-center space-x-2 sm:space-x-4">
@@ -78,9 +78,10 @@ export function Navbar() {
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-          
+          <ThemeSwitcher />
           <Link href={communityId ? `#` : "/account"}>
             <div className="flex items-center space-x-2 cursor-pointer p-1 rounded-lg hover:bg-[#c0c0c046]">
+              
               <Avatar className="h-8 w-8">
                 <AvatarImage src="" />
                 <AvatarFallback className="bg-[#8ABF17] text-white font-semibold">
