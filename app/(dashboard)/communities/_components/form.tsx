@@ -16,6 +16,23 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { SubmitButton } from "@/components/submit-button";
 import FileUpload from "./file-input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
+const cities = [ 
+  { key: 'recife', value: 'Recife' },
+  { key: 'carpina', value: 'Carpina' },
+]
+const states = [ 
+  { key: 'pe', value: 'Pernambuco' },
+]
 
 interface CreateCommunityFormProps {
   onSuccess?: () => void;
@@ -36,7 +53,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
         toast.error("A imagem de capa é obrigatória");
         return;
       }
-
+      
       formData.append("cover", coverFile);
       await createCommunity(formData);
       toast.success("Comunidade criada com sucesso");
@@ -72,20 +89,35 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
               className="border-primary"
             />
           </div>
-          <Label htmlFor="city">Cidade*</Label>
-          <Input
-            type="text"
-            name="city"
-            placeholder="Cidade da comunidade"
-            required
-          />
-          <Label htmlFor="state">Estado*</Label>
-          <Input
-            type="text"
-            name="state"
-            placeholder="Estado da comunidade"
-            required
-          />
+          <div className="flex gap-4 justify-center">
+
+          <Select>
+            <SelectTrigger className="">
+              <SelectValue placeholder="Selecione a Cidade" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Cidades</SelectLabel>
+                {cities.map((city) => {
+                  return <SelectItem key={city.key} value={city.value}>{city.value}</SelectItem>
+                })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger className="">
+              <SelectValue placeholder="Select o Estado" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+              <SelectLabel>Estados</SelectLabel>
+                {states.map((state) => {
+                  return <SelectItem key={state.key} value={state.value}>{state.value}</SelectItem>
+                })}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          </div>
           <div className="flex justify-between gap-2">
             <DialogClose asChild>
               <Button className="w-full" variant="outline">
