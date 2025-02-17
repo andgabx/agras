@@ -91,7 +91,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
           </div>
           <div className="flex gap-4 justify-center">
 
-          <Select>
+          <Select name="city">
             <SelectTrigger className="">
               <SelectValue placeholder="Selecione a Cidade" />
             </SelectTrigger>
@@ -104,7 +104,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
               </SelectGroup>
             </SelectContent>
           </Select>
-          <Select>
+          <Select name="state">
             <SelectTrigger className="">
               <SelectValue placeholder="Select o Estado" />
             </SelectTrigger>

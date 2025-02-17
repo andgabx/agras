@@ -1,15 +1,15 @@
+// app/(dashboard)/community/[communityId]/areas/grid-areas.tsx
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { ScrollShadow } from "@heroui/scroll-shadow";
 import { getAreas } from "../_actions/get-areas";
 import Image from "next/image";
+import { ClientAreaCard } from "./ClientAreaCard";
+
+export interface GridAreaCardProps {
+  name?: string;
+  description?: string;
+  onClick?: () => void;
+}
 
 const GridAreas = async ({ params }: { params: { communityId: string } }) => {
   const areas = await getAreas(Number(params.communityId));
@@ -32,21 +32,12 @@ const GridAreas = async ({ params }: { params: { communityId: string } }) => {
           ) : (
             <div className="grid grid-cols-3 gap-6 p-4">
               {areas.map((area) => (
-                <Card key={area.id} className="overflow-hidden">
-                  <div className="aspect-video bg-gray-300"></div>
-                  <CardHeader>
-                    <CardTitle className="text-xl">{area.name}</CardTitle>
-                    <CardDescription>{area.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-red-500">2 tarefas pendentes</p>
-                  </CardContent>
-                  <CardFooter>
-                    <Button className="w-full bg-[#95C11F] hover:bg-[#86AD1B]">
-                      Visualizar Canteiros
-                    </Button>
-                  </CardFooter>
-                </Card>
+                <ClientAreaCard
+                  key={area.id}
+                  areas={area}
+                  name={area.name}
+                  description={area.description}
+                />
               ))}
             </div>
           )}
