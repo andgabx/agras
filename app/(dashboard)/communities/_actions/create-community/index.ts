@@ -33,11 +33,9 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     throw new Error("Usuário não autenticado.");
   }
 
-  // Obter o arquivo da imagem do FormData
   const coverFile = formData.get("cover") as File;
   let coverUrl = null;
 
-  // Se houver um arquivo, fazer upload para o bucket do Supabase
   if (coverFile && coverFile instanceof File) {
     coverUrl = await uploadCover(coverFile);
   }

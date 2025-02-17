@@ -19,7 +19,7 @@ export const CreateCommunitySchema = z.object({
       })
     )
     .min(1, "Deve haver pelo menos um membro"),
-  cover: z.string().min(1, "Capa é obrigatória"),
+  cover: z.string().optional(),
 });
 
 export type CreateCommunityInput = z.infer<typeof CreateCommunitySchema>;
