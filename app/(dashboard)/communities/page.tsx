@@ -1,5 +1,4 @@
-import { Suspense } from "react";
-import CommunityList from "./_components/community-list";
+
 import AddCommunityButton from "./_components/add-community-button";
 import { BentoGridDemo } from "./_components/grid-community";
 import { ScrollShadow } from "@heroui/scroll-shadow";

@@ -2,6 +2,7 @@ import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { getCommunities } from "../_actions/get-communities";
 import { ClientBentoItem } from "./ClientBentoItem";
 import Image from "next/image";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 const Placeholderteste = () => (
   <div className="flex flex-1 w-full h-full min-h-[8rem] rounded-xl bg-primary"></div>
@@ -14,7 +15,12 @@ export async function BentoGridDemo() {
     <>
       {communities.length === 0 ? (
         <div className="flex flex-col items-center justify-center min-h-[200px] py-8 text-center space-y-8">
-          <Image src="/no-community-image.png" alt="Logo" width={300} height={300} />
+          <Image
+            src="/no-community-image.png"
+            alt="Logo"
+            width={300}
+            height={300}
+          />
           <h3 className="text-xl font-semibold mb-2">
             Nenhuma comunidade encontrada
           </h3>
@@ -33,8 +39,21 @@ export async function BentoGridDemo() {
               description={community.description || "Sem descrição"}
               city={community?.city || "Sem cidade"}
               state={community?.state || "Sem estado"}
-              header={<Placeholderteste />}
-              className="relative"
+              header={
+                community.cover ? (
+                  <div className="w-full h-full min-h-[8rem] rounded-xl overflow-hidden">
+                    <Image
+                      src={community.cover}
+                      alt="Foto de capa"
+                      width={400}
+                      height={200}
+                      className="w-full max-h-[8rem] h-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <Placeholderteste />
+                )
+              }
             />
           ))}
         </BentoGrid>

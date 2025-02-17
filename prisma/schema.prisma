@@ -1,0 +1,10 @@
+model Community {
+  id          String      @id @default(uuid())
+  name        String
+  description String?
+  city        String
+  state       String
+  cover       String?     // nova coluna adicionada
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+} 

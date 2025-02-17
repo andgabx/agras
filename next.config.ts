@@ -1,20 +1,22 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
-
-module.exports = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "50mb",
+    },
+  },
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'smwftcudujqqbjucjsfh.supabase.co',
-        port: '',
-        pathname: '/storage/v1/object/public/Uploads/**',
-        search: '',
+        protocol: "https",
+        hostname: "smwftcudujqqbjucjsfh.supabase.co",
+        port: "",
+        pathname: "/storage/v1/object/public/**",
+        search: "",
       },
     ],
   },
-}
+};
+
 export default nextConfig;

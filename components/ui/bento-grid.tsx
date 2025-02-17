@@ -59,7 +59,7 @@ export const BentoGridItem = ({
       <div className="" />
 
       <div className="h-full flex flex-col">
-        <div className="">
+        <div className="h-48">
           {header}
         </div>
 

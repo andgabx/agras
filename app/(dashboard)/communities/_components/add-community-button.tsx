@@ -6,6 +6,7 @@ import { CreateCommunityForm } from "./form";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
+import FileUpload from "./file-input";
 
 const AddCommunityButton = () => {
   const [open, setOpen] = useState(false);

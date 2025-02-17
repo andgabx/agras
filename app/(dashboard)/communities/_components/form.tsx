@@ -15,14 +15,29 @@ import { DialogClose } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { SubmitButton } from "@/components/submit-button";
+import FileUpload from "./file-input";
 
 interface CreateCommunityFormProps {
   onSuccess?: () => void;
 }
 
 export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+
+  const handleUpload = (file: File | null, preview: string | null) => {
+    if (file) {
+      setCoverFile(file);
+    }
+  };
+
   async function handleSubmit(formData: FormData) {
     try {
+      if (!coverFile) {
+        toast.error("A imagem de capa é obrigatória");
+        return;
+      }
+
+      formData.append("cover", coverFile);
       await createCommunity(formData);
       toast.success("Comunidade criada com sucesso");
       onSuccess?.();
@@ -49,6 +64,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
               placeholder="Nome da comunidade"
               required
             />
+
             <Label htmlFor="description">Descrição</Label>
             <Textarea
               name="description"
@@ -80,6 +96,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
               Criar Comunidade
             </SubmitButton>
           </div>
+          <FileUpload onChange={handleUpload} />
         </form>
       </CardContent>
     </Card>

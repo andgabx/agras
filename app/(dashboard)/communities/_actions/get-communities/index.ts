@@ -9,7 +9,7 @@ export type Community = {
   members_count: number;
   created_at: string;
   description: string | null; 
-  image: string | null;
+  cover: string | null;
   city: string | null;
   state: string | null;
   creator_name: string;

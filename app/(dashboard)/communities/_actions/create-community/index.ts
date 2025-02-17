@@ -4,14 +4,42 @@ import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 import { CreateCommunitySchema } from "./schema";
 
+const uploadCover = async (file: File) => {
+  const supabase = await createClient();
+  const fileName = `${Date.now()}-${file.name}`;
+
+  const { data: uploadData, error } = await supabase.storage
+    .from("Uploads")
+    .upload(`Community/${fileName}`, file);
+
+  if (error) throw error;
+
+  const { data: urlData } = supabase.storage
+    .from("Uploads")
+    .getPublicUrl(uploadData.path);
+
+  return urlData.publicUrl;
+};
+
 export const createCommunity = async (formData: FormData): Promise<void> => {
   const supabase = await createClient();
 
   // Obter o usuário atual
-  const { data: { user }, } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     throw new Error("Usuário não autenticado.");
+  }
+
+  // Obter o arquivo da imagem do FormData
+  const coverFile = formData.get("cover") as File;
+  let coverUrl = null;
+
+  // Se houver um arquivo, fazer upload para o bucket do Supabase
+  if (coverFile && coverFile instanceof File) {
+    coverUrl = await uploadCover(coverFile);
   }
 
   // Garantir que os valores não sejam nulos
@@ -31,6 +59,7 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     state,
     creator_name,
     members,
+    cover: coverUrl,
   });
 
   if (!success) {
@@ -61,7 +90,8 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     city,
     state,
     creator_name,
-    members
+    members,
+    cover: coverUrl,
   });
 
   if (insertError) {
