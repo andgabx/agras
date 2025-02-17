@@ -24,15 +24,41 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"
+} from "@/components/ui/select";
 
-const cities = [ 
-  { key: 'recife', value: 'Recife' },
-  { key: 'carpina', value: 'Carpina' },
-]
-const states = [ 
-  { key: 'pe', value: 'Pernambuco' },
-]
+const cities = [
+  { key: "recife", value: "Recife" },
+  { key: "carpina", value: "Carpina" },
+];
+const states = [
+  { key: "AC", value: "Acre" },
+  { key: "AL", value: "Alagoas" },
+  { key: "AP", value: "Amapá" },
+  { key: "AM", value: "Amazonas" },
+  { key: "BA", value: "Bahia" },
+  { key: "CE", value: "Ceará" },
+  { key: "DF", value: "Distrito Federal" },
+  { key: "ES", value: "Espírito Santo" },
+  { key: "GO", value: "Goiás" },
+  { key: "MA", value: "Maranhão" },
+  { key: "MT", value: "Mato Grosso" },
+  { key: "MS", value: "Mato Grosso do Sul" },
+  { key: "MG", value: "Minas Gerais" },
+  { key: "PA", value: "Pará" },
+  { key: "PB", value: "Paraíba" },
+  { key: "PR", value: "Paraná" },
+  { key: "PE", value: "Pernambuco" },
+  { key: "PI", value: "Piauí" },
+  { key: "RJ", value: "Rio de Janeiro" },
+  { key: "RN", value: "Rio Grande do Norte" },
+  { key: "RS", value: "Rio Grande do Sul" },
+  { key: "RO", value: "Rondônia" },
+  { key: "RR", value: "Roraima" },
+  { key: "SC", value: "Santa Catarina" },
+  { key: "SP", value: "São Paulo" },
+  { key: "SE", value: "Sergipe" },
+  { key: "TO", value: "Tocantins" },
+];
 
 interface CreateCommunityFormProps {
   onSuccess?: () => void;
@@ -53,7 +79,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
         toast.error("A imagem de capa é obrigatória");
         return;
       }
-      
+
       formData.append("cover", coverFile);
       await createCommunity(formData);
       toast.success("Comunidade criada com sucesso");
@@ -73,7 +99,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
       </CardHeader>
       <CardContent>
         <form className="space-y-4">
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="name">Nome*</Label>
             <Input
               type="text"
@@ -89,34 +115,34 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
               className="border-primary"
             />
           </div>
-          <div className="flex gap-4 justify-center">
 
-          <Select name="city">
-            <SelectTrigger className="">
-              <SelectValue placeholder="Selecione a Cidade" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectLabel>Cidades</SelectLabel>
-                {cities.map((city) => {
-                  return <SelectItem key={city.key} value={city.value}>{city.value}</SelectItem>
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-          <Select name="state">
-            <SelectTrigger className="">
-              <SelectValue placeholder="Select o Estado" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-              <SelectLabel>Estados</SelectLabel>
-                {states.map((state) => {
-                  return <SelectItem key={state.key} value={state.value}>{state.value}</SelectItem>
-                })}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <div className="flex gap-4 justify-center items-center">
+            <div className="text-center">
+              <Input
+                type="text"
+                name="city"
+                placeholder="Cidade"
+                required
+              />
+            </div>
+
+            <Select name="state">
+              <SelectTrigger className="max-w-">
+                <SelectValue placeholder="Selecione o Estado" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Estados</SelectLabel>
+                  {states.map((state) => {
+                    return (
+                      <SelectItem key={state.key} value={state.key}>
+                        {state.value}
+                      </SelectItem>
+                    );
+                  })}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
           </div>
           <div className="flex justify-between gap-2">
             <DialogClose asChild>

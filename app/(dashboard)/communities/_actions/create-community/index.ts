@@ -40,7 +40,6 @@ export const createCommunity = async (formData: FormData): Promise<void> => {
     coverUrl = await uploadCover(coverFile);
   }
 
-  // Garantir que os valores não sejam nulos
   const name = formData.get("name")?.toString().trim();
   const admin_id = user.id;
   const creator_name = user.user_metadata.full_name;
