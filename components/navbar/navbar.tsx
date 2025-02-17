@@ -58,9 +58,12 @@ export function Navbar() {
             ) : (
               <span className="font-medium">
                 {pathName === "/communities"
-                  ? "Comunidades"
+                  ? <p className="font-normal text-[18px] uppercase">Comunidades</p>
                   : params.communityId
-                    ? `Comunidade ${communityName}`
+                    ? <div className="flex flex-col space-y-1">
+                      <p className="font-normal text-[18px] uppercase">Comunidade</p>
+                      <p className="font-bold text-[20px] uppercase">{communityName}</p>
+                    </div>
                     : pathName === "/dashboard"
                       ? "Dashboard"
                       : "Carregando..."}
