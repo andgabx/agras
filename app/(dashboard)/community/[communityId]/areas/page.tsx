@@ -1,6 +1,6 @@
 import { Input } from "@/components/ui/input";
-import AddAreaButton from "./_components/add-area-button";
-import GridAreas from "./_components/grid-areas";
+import AddAreaButton from "./area/_components/add-area-button";
+import GridAreas from "./area/_components/grid-areas";
 import { Search, Volume2 } from "lucide-react";
 
 const Areas = async ({ params }: { params: { communityId: string } }) => {
