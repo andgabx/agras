@@ -11,7 +11,6 @@ import {
 import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { useParams, usePathname } from "next/navigation";
-import { set } from "zod";
 import { ThemeSwitcher } from "../theme-switcher";
 
 export function Navbar() {
@@ -57,36 +56,42 @@ export function Navbar() {
               <span className="font-medium">MEU PERFIL</span>
             ) : (
               <span className="font-medium">
-                {pathName === "/communities"
-                  ? <p className="font-normal text-[18px] uppercase">Comunidades</p>
-                  : params.communityId
-                    ? <div className="flex flex-col space-y-1">
-                      <p className="font-normal text-[18px] uppercase">Comunidade</p>
-                      <p className="font-bold text-[20px] uppercase">{communityName}</p>
-                    </div>
-                    : pathName === "/dashboard"
-                      ? "Dashboard"
-                      : "Carregando..."}
+                {pathName === "/communities" ? (
+                  <p className="font-normal text-[18px] uppercase">
+                    Comunidades
+                  </p>
+                ) : params.communityId ? (
+                  <div className="flex flex-col space-y-1">
+                    <p className="font-normal text-[18px] uppercase">
+                      Comunidade
+                    </p>
+                    <p className="font-bold text-[20px] uppercase">
+                      {communityName}
+                    </p>
+                  </div>
+                ) : pathName === "/dashboard" ? (
+                  "Dashboard"
+                ) : (
+                  "Carregando..."
+                )}
               </span>
             )}
           </span>
-           
         </div>
 
         <div className="ml-auto flex items-center space-x-2 sm:space-x-4">
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Bell className="h-5 w-5 text-muted-foreground hover:text-foreground cursor-pointer" />
+                <Bell className="h-5 w-5 text-muted-foreground dark:bg-black hover:text-foreground cursor-pointer" />
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
           <ThemeSwitcher />
           <Link href={communityId ? `#` : "/account"}>
             <div className="flex items-center space-x-2 cursor-pointer p-1 rounded-lg hover:bg-[#c0c0c046]">
-              
               <Avatar className="h-8 w-8">
-                <AvatarImage src="" />
+                <AvatarImage src={user?.user_metadata.avatar_url} />
                 <AvatarFallback className="bg-[#8ABF17] text-white font-semibold">
                   {user?.user_metadata.full_name?.charAt(0)}
                 </AvatarFallback>
@@ -105,8 +110,8 @@ export function Navbar() {
                         index: number,
                         arr: Array<number>
                       ) => {
-                        if (index === 0) return curr; // Primeiro nome
-                        if (index === arr.length - 1) return acc + " " + curr; // Último nome
+                        if (index === 0) return curr;
+                        if (index === arr.length - 1) return acc + " " + curr;
                         return acc;
                       },
                       ""

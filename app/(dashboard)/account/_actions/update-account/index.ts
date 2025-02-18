@@ -4,34 +4,69 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 
-const updateAccount = async (formData: FormData) => {
+export default async function updateAccount(formData: FormData) {
   const supabase = await createClient();
-  const phone = formData.get("phone") as string;
-  const fullName = formData.get("full_name") as string;
 
+  // Se houver um arquivo para upload
+  const profileImage = formData.get("profileImage") as File;
+  let avatarUrl = null;
 
-  const { error } = await supabase.auth.updateUser({
+  if (profileImage) {
+    // Verificar se existe uma imagem antiga e deletá-la
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    const oldAvatarUrl = user?.user_metadata?.avatar_url;
+
+    if (oldAvatarUrl) {
+      // Extrair o path do arquivo da URL do Supabase
+      const pathRegex = /\/Uploads\/([^?]+)/;
+      const match = oldAvatarUrl.match(pathRegex);
+      const filePath = match ? match[1] : null;
+
+      if (filePath) {
+        const { error: deleteError } = await supabase.storage
+          .from("Uploads")
+          .remove([filePath]);
+
+        if (deleteError) {
+          console.error("Erro ao deletar imagem antiga:", deleteError);
+        }
+      }
+    }
+
+    // Upload da nova imagem
+    const fileName = `${Date.now()}-${profileImage.name}`;
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from("Uploads")
+      .upload(`User/${fileName}`, profileImage);
+
+    if (uploadError) throw uploadError;
+
+    const { data: urlData } = supabase.storage
+      .from("Uploads")
+      .getPublicUrl(`User/${fileName}`);
+
+    avatarUrl = urlData.publicUrl;
+  }
+
+  // Atualiza os dados do usuário incluindo a URL da imagem
+  const { error: updateError } = await supabase.auth.updateUser({
     data: {
-      full_name: fullName,
-      phone: phone,
+      full_name: formData.get("full_name"),
+      username: formData.get("username"),
+      phone: formData.get("phone"),
+      avatar_url: avatarUrl || undefined,
     },
   });
 
-  revalidatePath("/account");
+  if (updateError) throw updateError;
 
-  if (error) {
-    return encodedRedirect(
-      "error",
-      "/account",
-      "Falha na atualização dos dados"
-    );
-  }
+  revalidatePath("/account");
 
   return encodedRedirect(
     "success",
     "/account",
     "Dados atualizados com sucesso"
   );
-};
-
-export default updateAccount;
+}

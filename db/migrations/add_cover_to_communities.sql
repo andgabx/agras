@@ -1,7 +1,6 @@
-ALTER TABLE communities
-ADD COLUMN cover TEXT,
-ALTER COLUMN cover SET DEFAULT NULL,
-ALTER COLUMN cover DROP NOT NULL;
+-- Adiciona a coluna cover
+ALTER TABLE communities 
+ADD COLUMN cover TEXT;
 
 -- Adiciona política RLS para permitir leitura do cover
 CREATE POLICY "Anyone can view community cover"
