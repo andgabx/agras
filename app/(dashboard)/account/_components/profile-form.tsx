@@ -11,7 +11,7 @@ import InputProfilePic from "./input-profile-pic";
 import updateAccount from "../_actions/update-account";
 import Image from "next/image";
 import { createClient } from "@/utils/supabase/client";
-
+import { revalidatePath } from "next/cache";
 interface ProfileFormProps {
   user: any;
 }
@@ -56,6 +56,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
       formData.append("profileImage", profileImage);
     }
     return updateAccount(formData);
+    revalidatePath("/account");
   };
 
   return (

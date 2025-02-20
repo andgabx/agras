@@ -12,7 +12,7 @@ import { createClient } from "@/utils/supabase/client";
 import { useEffect, useState } from "react";
 import { useParams, usePathname } from "next/navigation";
 import { ThemeSwitcher } from "../theme-switcher";
-
+import { SidebarTrigger } from "../ui/sidebar";
 export function Navbar() {
   const [user, setUser] = useState<any>(null);
   const [communityName, setCommunityName] = useState("");
@@ -48,9 +48,12 @@ export function Navbar() {
   }, [params.communityId]);
 
   return (
-    <div className="border-b">
-      <div className="flex h-20 items-center px-4">
-        <div className="flex flex-col ml-2 items-start">
+    <div >
+
+      <div className="flex h-20 justify-between items-center px-4">
+        <div className="flex items-center space-x-4">
+          <SidebarTrigger className="md:hidden items-center" />
+
           <span className="text-sm text-black font-medium">
             {pathName === "/account" ? (
               <span className="font-medium">MEU PERFIL</span>
