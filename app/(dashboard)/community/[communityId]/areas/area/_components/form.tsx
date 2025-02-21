@@ -51,13 +51,14 @@ export function CreateAreaForm({ onSuccess }: CreateAreaFormProps) {
             <Input
               type="text"
               name="name"
-              placeholder="Nome da comunidade"
+              placeholder="Nome da área"
+              className="border-primary"
               required
             />
             <Label htmlFor="description">Descrição</Label>
             <Textarea
               name="description"
-              placeholder="Descrição da comunidade"
+              placeholder="Descrição da área"
               className="border-primary"
             />
           </div>

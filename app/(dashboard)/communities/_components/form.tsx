@@ -105,6 +105,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
               type="text"
               name="name"
               placeholder="Nome da comunidade"
+              className="border-primary"
               required
             />
 
@@ -122,6 +123,7 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
                 type="text"
                 name="city"
                 placeholder="Cidade"
+                className="border-primary"
                 required
               />
             </div>

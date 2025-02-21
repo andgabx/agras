@@ -53,7 +53,8 @@ export function CreateSeedbedForm({ onSuccess }: CreateSeedbedFormProps) {
             <Input
               type="text"
               name="name"
-              placeholder="Nome da comunidade"
+              placeholder="Nome do canteiro"
+              className="border-primary"
               required
             />
           </div>

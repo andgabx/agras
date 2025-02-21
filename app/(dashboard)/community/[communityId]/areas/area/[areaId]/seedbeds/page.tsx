@@ -1,30 +1,30 @@
 import { Input } from "@/components/ui/input";
-import { Search, Volume2 } from "lucide-react";
 import AddSeedbedButton from "./_components/add-seedbed-button";
-import { getSeedbeds } from "./_actions/get-seedbeds";
+import GridSeedbeds from "./_components/grid-seedbeds";
+import { Search, Volume2 } from "lucide-react";
 
 const Seedbeds = async ({ params }: { params: { areaId: number } }) => {
-  const seedbeds = await getSeedbeds(params.areaId);
   return (
-    <div className="">
-      <AddSeedbedButton />
-      {seedbeds.map((seedbed, index) => {
-        return (
-          <div key={index}>
-            <h1>========================</h1>
-            <h1 className="font-bold">NOME: <span className="font-normal">{seedbed.name}</span></h1>
-            <h1 className="font-bold">AREA ID: <span className="font-normal">{seedbed.area_id}</span></h1>
-            <h1 className="font-bold">COMUNIDADE ID: <span className="font-normal">{seedbed.community_id}</span></h1>
-            <h1 className="font-bold">
-              CRIADO EM: <span className="font-normal">{seedbed.created_at.split('T')[0]}</span>
-            </h1>
-            <h1 className="font-bold">
-              ID DO CANTEIRO: <span className="font-normal">{seedbed.id}</span>
-            </h1>
-            <h1>========================</h1>
+    <div className="container mx-auto h-[calc(100vh-120px)] overflow-hidden flex flex-col">
+      <div className="flex justify-between items-center py-6 bg-background">
+        <div className="flex items-center gap-2">
+          <h1 className="text-3xl font-bold">Canteiros</h1>
+          <Volume2 className="text-primary" size={32} />
+        </div>
+
+        <div className="flex gap-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
+            <Input
+              className="pl-10 w-[300px]"
+              placeholder="Pesquise por Canteiros..."
+            />
           </div>
-        );
-      })}
+          <AddSeedbedButton />
+        </div>
+      </div>
+
+      <GridSeedbeds params={params} />
     </div>
   );
 };
