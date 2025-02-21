@@ -4,7 +4,7 @@ import { encodedRedirect } from "@/utils/utils";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
 
-export default async function updateAccount(formData: FormData) {
+export default async function updateAccount(formData: FormData, pathname: string) {
   const supabase = await createClient();
 
   // Se houver um arquivo para upload
@@ -62,11 +62,11 @@ export default async function updateAccount(formData: FormData) {
 
   if (updateError) throw updateError;
 
-  revalidatePath("/account");
+  revalidatePath(pathname);
 
   return encodedRedirect(
     "success",
-    "/account",
+    pathname,
     "Dados atualizados com sucesso"
   );
 }

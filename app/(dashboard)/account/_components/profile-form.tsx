@@ -10,15 +10,26 @@ import { SubmitButton } from "@/components/submit-button";
 import InputProfilePic from "./input-profile-pic";
 import updateAccount from "../_actions/update-account";
 import Image from "next/image";
-import { createClient } from "@/utils/supabase/client";
-import { revalidatePath } from "next/cache";
+import { createClient } from "@/utils/supabase/client"; 
+import { usePathname } from "next/navigation";
 interface ProfileFormProps {
   user: any;
 }
 
 export function ProfileForm({ user }: ProfileFormProps) {
   const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [imageExists, setImageExists] = useState(false);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (profileImage) {
+      const preview = URL.createObjectURL(profileImage);
+      setPreviewImage(preview);
+      return () => URL.revokeObjectURL(preview);
+    }
+  }, [profileImage]);
 
   useEffect(() => {
     const checkImageExists = async () => {
@@ -55,8 +66,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
     if (profileImage) {
       formData.append("profileImage", profileImage);
     }
-    return updateAccount(formData);
-    revalidatePath("/account");
+    return updateAccount(formData, pathname);
   };
 
   return (
@@ -86,7 +96,21 @@ export function ProfileForm({ user }: ProfileFormProps) {
         {/* Avatar */}
         <div className="absolute -bottom-12 left-8">
           <div className="relative group">
-            {user?.user_metadata?.avatar_url && imageExists ? (
+            {previewImage ? (
+              <>
+                <img
+                  src={previewImage}
+                  alt="Preview Avatar"
+                  className="w-24 h-24 rounded-full object-cover"
+                />
+                <label
+                  htmlFor="profile-upload"
+                  className="absolute inset-0 bg-black/0 group-hover:bg-black/40 rounded-full flex items-center justify-center transition-colors cursor-pointer"
+                >
+                  <Camera className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                </label>
+              </>
+            ) : user?.user_metadata?.avatar_url && imageExists ? (
               <>
                 <Image
                   src={user.user_metadata.avatar_url}
@@ -100,21 +124,21 @@ export function ProfileForm({ user }: ProfileFormProps) {
                   className="absolute inset-0 bg-black/0 group-hover:bg-black/40 rounded-full flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <Camera className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <input
-                    id="profile-upload"
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) handleImageSelect(file);
-                    }}
-                  />
                 </label>
               </>
             ) : (
               <InputProfilePic onImageSelect={handleImageSelect} />
             )}
+            <input
+              id="profile-upload"
+              type="file"
+              className="hidden"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) setProfileImage(file);
+              }}
+            />
           </div>
         </div>
       </div>
