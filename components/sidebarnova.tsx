@@ -66,7 +66,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         },
         {
             label: "Tarefas",
-            href: communityId ? `/community/${communityId}/tarefas` : "#",
+            href: communityId ? `/community/${communityId}/tasks` : "#",
             icon: <CalendarCheck className="flex-shrink-0 transition-colors" />,
         },
         {
