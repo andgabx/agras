@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const CreateCommunitySchema = z.object({
-  name: z.string().min(1, "Nome é obrigatório"),
+  name: z.string().min(1, "Nome é obrigatório").max(20, "Nome muito longo"),
   admin_id: z.string().uuid("ID do administrador inválido"),
   description: z
     .string()

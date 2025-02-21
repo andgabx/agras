@@ -26,7 +26,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid md:auto-rows-[23rem] grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4",
+        "grid md:auto-rows-[23rem] grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto px-4",
         className
       )}
     >
@@ -73,7 +73,7 @@ export const BentoGridItem = ({
             </p>
           </div>
 
-          <h3 className="font-bold text-xl text-neutral-900 dark:text-neutral-100 text-center mb-1 mt-2">
+          <h3 className="font-bold text-[18px] text-neutral-900 dark:text-neutral-100 text-center mb-1 mt-2">
             {title}
           </h3>
 
@@ -86,7 +86,7 @@ export const BentoGridItem = ({
               {city}, {state}
             </span>
           </div>
-
+          
           <Button 
             onClick={onClick ?? (() => {})} 
             className="mt-auto w-full"
