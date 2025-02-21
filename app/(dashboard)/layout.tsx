@@ -28,7 +28,7 @@ export default function DashboardLayout({
                     orientation="horizontal"
                     className="bg-[#CECECE] w-full relative mt-0.5"
                 />
-                {children}
+                <div className="p-4">{children}</div>
             </SidebarInset>
         </SidebarProvider>
     );

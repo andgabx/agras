@@ -215,6 +215,7 @@ const Sidebar = React.forwardRef<
                         style={
                             {
                                 "--sidebar-width": SIDEBAR_WIDTH_MOBILE,
+                                "borderRight": "1px solid #CECECE",
                             } as React.CSSProperties
                         }
                         side={side}
@@ -256,14 +257,14 @@ const Sidebar = React.forwardRef<
                         // Adjust the padding for floating and inset variants.
                         variant === "floating" || variant === "inset"
                             ? "p- group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)_+_theme(spacing.4)_+2px)]"
-                            : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-r group-data-[side=right]:border-l",
+                            : "group-data-[collapsible=icon]:w-[--sidebar-width-icon] group-data-[side=left]:border-[#CECECE] border-[#CECECE] group-data-[side=right]:border-l",
                         className
                     )}
                     {...props}
                 >
                     <div
                         data-sidebar="sidebar"
-                        className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:-lg group-data-[variant=floating]:border group-data-[variant=floating]:border-sidebar-border group-data-[variant=floating]:shadow"
+                        className="flex h-full w-full flex-col bg-sidebar group-data-[variant=floating]:-lg group-data-[variant=floating]:border border-[#CECECE] group-data-[variant=floating]:border-[#CECECE] group-data-[variant=floating]:shadow"
                     >
                         {children}
                     </div>
@@ -361,7 +362,7 @@ const SidebarFooter = React.forwardRef<
         <div
             ref={ref}
             data-sidebar="footer"
-            className={cn("flex flex-col bg-primary gap-2", className)}
+            className={cn("flex -m-200 bg-primary overflow-auto group-data-[collapsible=icon]:overflow-hidden", className)}
             {...props}
         />
     );
@@ -503,7 +504,7 @@ const SidebarMenuItem = React.forwardRef<
 SidebarMenuItem.displayName = "SidebarMenuItem";
 
 const sidebarMenuButtonVariants = cva(
-    "peer/menu-button flex w-full items-center overflow-hidden py-6 px-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-white focus-visible:ring-2 active:bg-sidebar-accent active:text-primary disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-primary data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-white group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+    "peer/menu-button flex w-full items-center overflow-hidden py-6 px-2 text-left text-sm outline-none ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-white focus-visible:ring-2 active:bg-sidebar-accent active:text-primary disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-primary data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-white group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-6 [&>svg]:mr-1 [&>svg]:shrink-0",
     {
         variants: {
             variant: {
@@ -682,7 +683,7 @@ const SidebarMenuSub = React.forwardRef<
         ref={ref}
         data-sidebar="menu-sub"
         className={cn(
-            "mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-sidebar-border py-0.5",
+            "mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-[#CECECE] py-0.5",
             "group-data-[collapsible=icon]:hidden",
             className
         )}
