@@ -6,7 +6,7 @@ export default async function Participantes({
   params: { communityId: string };
 }) {
   return (
-    <div className="h-full flex flex-col gap-4 max-w-xl">
+    <div className="">
       <MemberList communityId={params.communityId} />
     </div>
   );

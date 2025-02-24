@@ -8,22 +8,35 @@ import {
 } from "@/components/ui/table";
 import { getMembers } from "../_actions/get-members";
 import { Badge } from "@/components/ui/badge";
-import { adminVerify } from "@/app/(dashboard)/community/[communityId]/participantes/_actions/admin-verify";
+import { adminVerify } from "@/app/(dashboard)/community/[communityId]/members/_actions/admin-verify";
+import { X, Crown, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 
 const MemberList = async ({ communityId }: { communityId: string }) => {
-
   const members = await getMembers(communityId);
   const adminId = await adminVerify(communityId);
-  
+
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl font-bold">Participantes</h1>
+      <div className="flex justify-between items-center relative">
+        <h1 className="text-2xl font-bold">Participantes</h1>
+
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
+          <Input
+            className="pl-10 w-[300px]"
+            placeholder="Pesquise Membros..."
+          />
+        </div>
+      </div>
+
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Nome</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Posição</TableHead>
+            <TableHead>Ações</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -37,6 +50,16 @@ const MemberList = async ({ communityId }: { communityId: string }) => {
                 ) : (
                   <Badge variant="secondary">Membro</Badge>
                 )}
+              </TableCell>
+              <TableCell>
+                <div className="flex flex-row space-x-2">
+                  <button className="hover:scale-110 transition-transform">
+                    <Crown />
+                  </button>
+                  <button className="hover:scale-110 transition-transform">
+                    <X />
+                  </button>
+                </div>
               </TableCell>
             </TableRow>
           ))}

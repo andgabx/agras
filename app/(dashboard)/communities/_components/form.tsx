@@ -1,12 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { createCommunity } from "../_actions/create-community/index";
 import { useState } from "react";
@@ -91,74 +85,83 @@ export function CreateCommunityForm({ onSuccess }: CreateCommunityFormProps) {
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <CardDescription>
-          Crie uma nova comunidade para compartilhar conhecimento musical
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <form className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="name">Nome*</Label>
-            <Input
-              type="text"
-              name="name"
-              placeholder="Nome da comunidade"
-              className="border-primary"
-              required
-            />
+    <div className="space-y-6">
+      <div className="text-center">
+        <FileUpload onChange={handleUpload} />
+        <p className="text-sm text-muted-foreground mt-2">
+          Upload da capa da comunidade (Recomendado: 1200x400px)
+        </p>
+      </div>
 
-            <Label htmlFor="description">Descrição</Label>
-            <Textarea
-              name="description"
-              placeholder="Descrição da comunidade"
-              className="border-primary"
+      <form className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="name">Nome da Comunidade *</Label>
+            <Input
+              name="name"
+              placeholder="Ex: Comunidade Rock de Recife"
+              className="h-12"
+              required
             />
           </div>
 
-          <div className="flex gap-4 justify-center items-center">
-            <div className="text-center">
-              <Input
-                type="text"
-                name="city"
-                placeholder="Cidade"
-                className="border-primary"
-                required
-              />
-            </div>
+          <div className="space-y-2">
+            <Label htmlFor="description">Descrição</Label>
+            <Textarea
+              name="description"
+              placeholder="Descreva o propósito da sua comunidade"
+              className="h-32"
+            />
+          </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="city">Cidade *</Label>
+            <Input
+              name="city"
+              placeholder="Ex: Recife"
+              className="h-12"
+              required
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="state">Estado *</Label>
             <Select name="state">
-              <SelectTrigger className="max-w-">
-                <SelectValue placeholder="Selecione o Estado" />
+              <SelectTrigger className="h-12">
+                <SelectValue placeholder="Selecione seu estado" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Estados</SelectLabel>
-                  {states.map((state) => {
-                    return (
-                      <SelectItem key={state.key} value={state.key}>
-                        {state.value}
-                      </SelectItem>
-                    );
-                  })}
+                  {states.map((state) => (
+                    <SelectItem key={state.key} value={state.key}>
+                      {state.value}
+                    </SelectItem>
+                  ))}
                 </SelectGroup>
               </SelectContent>
             </Select>
           </div>
-          <div className="flex justify-between gap-2">
-            <DialogClose asChild>
-              <Button className="w-full" variant="outline">
-                Cancelar
-              </Button>
-            </DialogClose>
-            <SubmitButton formAction={handleSubmit} className="w-full">
-              Criar Comunidade
-            </SubmitButton>
-          </div>
-          <FileUpload onChange={handleUpload} />
-        </form>
-      </CardContent>
-    </Card>
+        </div>
+
+        <div className="flex flex-col md:flex-row gap-4 pt-4">
+          <DialogClose asChild>
+            <Button
+              variant="outline"
+              className="w-full h-12 text-base"
+              type="button"
+            >
+              Cancelar
+            </Button>
+          </DialogClose>
+          <SubmitButton
+            formAction={handleSubmit}
+            className="w-full h-12 text-base"
+          >
+            Criar Comunidade
+          </SubmitButton>
+        </div>
+      </form>
+    </div>
   );
 }

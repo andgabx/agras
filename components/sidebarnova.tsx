@@ -71,7 +71,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         },
         {
             label: "Participantes",
-            href: communityId ? `/community/${communityId}/participantes` : "#",
+            href: communityId ? `/community/${communityId}/members` : "#",
             icon: <Users className="flex-shrink-0 transition-colors" />,
         },
         {
