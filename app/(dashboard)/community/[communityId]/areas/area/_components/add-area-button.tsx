@@ -18,7 +18,7 @@ const AddAreaButton = () => {
           Criar
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="w-[95vw] max-w-2xl max-h-[90vh] overflow-y-auto sm:w-full">
         <DialogTitle className="text-primary font-bold">
           Criar Área
         </DialogTitle>

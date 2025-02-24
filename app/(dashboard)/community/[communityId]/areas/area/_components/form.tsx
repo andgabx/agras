@@ -16,12 +16,22 @@ import { Textarea } from "@/components/ui/textarea";
 import { SubmitButton } from "@/components/submit-button";
 import { usePathname } from "next/navigation";
 import { form } from "@heroui/theme";
+import FileUpload from "./file-input";
+import { useState } from "react";
 
 interface CreateAreaFormProps {
   onSuccess?: () => void;
 }
 
 export function CreateAreaForm({ onSuccess }: CreateAreaFormProps) {
+    const [coverFile, setCoverFile] = useState<File | null>(null);
+  
+    const handleUpload = (file: File | null, preview: string | null) => {
+      if (file) {
+        setCoverFile(file);
+      }
+    };
+    
   const pathname = usePathname();
   const communityId = pathname.split("/")[2];
 
@@ -45,6 +55,12 @@ export function CreateAreaForm({ onSuccess }: CreateAreaFormProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <div className="text-center">
+          <FileUpload onChange={handleUpload} />
+          <p className="text-sm text-muted-foreground mt-2 mb-2">
+            Upload da capa da Área (Recomendado: 1200x400px)
+          </p>
+        </div>
         <form className="space-y-4">
           <div>
             <Label htmlFor="name">Nome*</Label>

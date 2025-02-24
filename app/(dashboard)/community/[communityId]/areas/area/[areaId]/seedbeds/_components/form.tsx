@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useState } from "react"; 
 import {
   Card,
   CardContent,
@@ -16,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { SubmitButton } from "@/components/submit-button";
 import { usePathname } from "next/navigation";
 import { form } from "@heroui/theme";
+import FileUpload from "./file-input";
 
 interface CreateSeedbedFormProps {
   onSuccess?: () => void;
@@ -25,6 +27,14 @@ export function CreateSeedbedForm({ onSuccess }: CreateSeedbedFormProps) {
   const pathname = usePathname();
   const communityId = pathname.split("/")[2];
   const areaId = pathname.split("/")[5];
+
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+
+  const handleUpload = (file: File | null, preview: string | null) => {
+    if (file) {
+      setCoverFile(file);
+    }
+  };
 
   async function handleSubmit(formData: FormData) {
     try {
@@ -47,6 +57,12 @@ export function CreateSeedbedForm({ onSuccess }: CreateSeedbedFormProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
+        <div className="text-center">
+          <FileUpload onChange={handleUpload} />
+          <p className="text-sm text-muted-foreground mt-2 mb-2">
+            Upload da capa do Canteiro (Recomendado: 1200x400px)
+          </p>
+        </div>
         <form className="space-y-4">
           <div>
             <Label htmlFor="name">Nome*</Label>
